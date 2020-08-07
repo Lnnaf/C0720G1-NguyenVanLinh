@@ -1,0 +1,31 @@
+h1{
+    color: #0433FF;
+    font-family: Arial;
+    margin: auto;
+    text-align: center;
+}
+p,span{
+    font-size: larger;
+    color: #0433FF;
+    font-family: "Agency FB";
+}
+span{
+    float:right;
+}
+table{
+    margin-right: 20%;
+    margin-left: 10%;
+    width:80%;
+    border-collapse: collapse;
+    border: 1px solid black;
+}
+th,td{
+    font-size: larger;
+    height: 50px;
+    font-family: arial, sans-serif;
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+tr:nth-child(2){
+    background-color: #FFB300;
+}
