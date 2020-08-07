@@ -1,0 +1,18 @@
+table{
+    width:100%;
+    border-collapse: collapse;
+    border:1px solid black;
+}
+th,td{
+    font-size:50px;
+    height:100px;
+    border:1px solid black;
+}
+th{
+    color:white;
+    font-family: 'Patua One', cursive;
+    background-color:red;
+}
+td{
+    font-family: 'Open Sans', sans-serif;
+}
