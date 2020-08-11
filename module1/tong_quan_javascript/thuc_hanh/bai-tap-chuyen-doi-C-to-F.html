@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>C to F</title>
+</head>
+<body>
+    <label for="inputC"> Enter Number of C </label>
+    <input type="number" id="inputC" name="inputC" required>
+    <label for="inputC"> To </label>
+    <input type="number" id="outputF">
+    <button onclick="convert()">Convert <img src="https://www.rapidtables.com/lib/icons/glyphicons_all/glyphicons_halflings/glyphicons_halflings_030_refresh.png" alt=""></button>
+
+    <script>
+        function convert()  {
+            let C=document.getElementById("inputC").value;
+            let F=(9*Number(C))/5+32;
+            document.getElementById("outputF");
+            outputF.value=F;
+        }
+    </script>
+</body>
+</html>

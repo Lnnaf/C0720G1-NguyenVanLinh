@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HCMUS</title>
+</head>
+<body>
+    <table>
+        <tr>
+            <th colspan="2"> CHƯƠNG TRÌNH TÍNH ĐIỂM TRUNG BÌNH BA MÔN</th>
+        </tr>
+        <tr>
+            <th>Nhập vào điểm môn Vật Lý</th>
+            <td><input type="number"id="numa" name="numa"></td>
+        </tr>
+        <tr>
+            <th>Nhập vào điểm môn Hoá Học</th>
+            <td><input type="number" id="numb" name="numb"></td>
+        </tr>
+        <tr>
+            <th>Nhập vào điểm môn Sinh Học</th>
+            <td><input type="number" id="numc" name="numc"></td>
+        </tr>
+        <tr>
+            <th>Điểm trung bình của bạn là</th>
+            <td><input type="text" id="Average"></td>
+        </tr>
+    </table>
+    <br><br>
+    <button onclick="average()">RUN</button>
+
+    <script>
+        function average() {
+            let a=document.getElementById("numa").value;
+            let b=document.getElementById("numb").value;
+            let c=document.getElementById("numc").value;
+            let average=(Number(a)+Number(b)+Number(c))/3;
+            document.getElementById("Average");
+            Average.value=average   ;
+
+        }
+
+
+    </script>
+</body>
+</html>

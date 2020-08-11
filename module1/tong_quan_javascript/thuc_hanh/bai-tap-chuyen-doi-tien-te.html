@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CONVERT CURRENCY</title>
+</head>
+<body>
+<form>
+    <table>
+        <tr>
+            <th>Amount</th>
+            <th>From Currency</th>
+            <th>To Currency</th>
+        </tr>
+        <tr>
+            <td><input type="text" id="amount"></td>
+            <td><select id="fromC">
+                <option selected value="VND">VND</option>
+                <option value="USD">USD</option>
+                </select></td>
+            <td><select id="toC">
+                <option selected value="USD" >USD</option>
+                <option value="VND" >VND</option>
+                </select></td>
+            <td><button type="button" onclick="convert()">Convert</button></td>
+        </tr>
+    </table>
+    <script>
+        function convert() {
+            let input = document.getElementById("amount").value;
+            let fromC = document.getElementById("fromC").value;
+            let toC = document.getElementById("toC").value;
+            debugger
+            if (fromC == "VND" && toC == "USD") {
+                a = parseInt(input);
+                let result = a/23000;
+                alert(result);
+
+            }else {
+                if (fromC=="USD" && toC=="VND"){
+                    a=parseInt(input);
+                    let result=a*23000;
+                    alert(result);
+                }else alert("Please")
+            }
+        }
+    </script>
+</form>
+</body>
+</html>
