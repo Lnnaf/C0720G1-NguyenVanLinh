@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Caculator</title>
+</head>
+<body>
+    <input type="text" id="num1">
+    <input type="text" id="num2">
+    <button onclick="plus()"> Button +</button>
+    <button onclick="minus()"> Button -</button>
+    <button  onclick="multiplied()">  Button x</button>
+    <button onclick="divided()">  Button /</button>
+    <br><br>
+     <p id="result">Result: </p>
+<script>
+
+
+    function plus() {
+        let firstNum=document.getElementById("num1").value;
+        let secondNum=document.getElementById("num2").value;
+        let total=Number(firstNum)+Number(secondNum);
+        document.getElementById("result").innerHTML="Result: "+total;
+    }
+    function minus() {
+        let firstNum=document.getElementById("num1").value;
+        let secondNum=document.getElementById("num2").value;
+        let total=Number(firstNum)-Number(secondNum);
+        document.getElementById("result").innerHTML="Result: "+total;
+    }
+    function multiplied() {
+        let firstNum=document.getElementById("num1").value;
+        let secondNum=document.getElementById("num2").value;
+        let total=Number(firstNum)*Number(secondNum);
+        document.getElementById("result").innerHTML="Result: "+total;
+    }
+    function divided() {
+        let firstNum=document.getElementById("num1").value;
+        let secondNum=document.getElementById("num2").value;
+        let total=Number(firstNum)/Number(secondNum);
+        document.getElementById("result").innerHTML="Result: "+total;
+    }
+
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="may-tinh.css">
+    <meta charset="UTF-8">
+    <title>Caculator</title>
+</head>
+<body>
+    <table>
+        <tr><th colspan="7" ><input id="result" type="text"></th>
+            </tr>
+        <tr>
+            <td><button value="(" onclick="result.value+=this.value">(</button></td>
+            <td><button value=")"onclick="result.value+=this.value">)</button></td>
+            <td colspan="2"><button id="btnAC" onclick="result.value=''">AC</button></td>
+        </tr>
+        <tr>
+            <td><button value="7" onclick="result.value+=this.value">7</button></td>
+            <td><button value="8"onclick="result.value+=this.value">8</button></td>
+            <td><button value="9"onclick="result.value+=this.value">9</button></td>
+            <td><button value="/"onclick="result.value+=this.value">&divide;</button></td>
+        </tr>
+        <tr>
+            <td><button value="4"onclick="result.value+=this.value">4</button></td>
+            <td><button value="5"onclick="result.value+=this.value">5</button></td>
+            <td><button value="6"onclick="result.value+=this.value">6</button></td>
+            <td><button value="*"onclick="result.value+=this.value">x</button></td>
+
+        </tr>
+        <tr>
+            <td><button value="1"onclick="result.value+=this.value">1</button></td>
+            <td><button value="2"onclick="result.value+=this.value">2</button></td>
+            <td><button value="3"onclick="result.value+=this.value">3</button></td>
+            <td><button value="-"onclick="result.value+=this.value">-</button></td>
+
+
+        </tr>
+        <tr>
+            <td><button value="0"onclick="result.value+=this.value">0</button></td>
+            <td><button value="." onclick="result.value+=this.value">.</button></td>
+            <td><button value="+" onclick="result.value+=this.value">+</button></td>
+            <td><button onclick="result.value=eval(result.value)">=</button></td>
+        </tr>
+    </table>
+
+</body>
+</html>
