@@ -14,30 +14,31 @@
     <br><br>
      <p id="result">Result: </p>
 <script>
-
+        let firstNum=document.getElementById("num1");
+        let secondNum=document.getElementById("num2");
 
     function plus() {
-        let firstNum=document.getElementById("num1").value;
-        let secondNum=document.getElementById("num2").value;
-        let total=Number(firstNum)+Number(secondNum);
+        let a=firstNum.value
+        let b=secondNum.value
+        let total=Number(a)+Number(b);
         document.getElementById("result").innerHTML="Result: "+total;
     }
     function minus() {
-        let firstNum=document.getElementById("num1").value;
-        let secondNum=document.getElementById("num2").value;
-        let total=Number(firstNum)-Number(secondNum);
+        let a=firstNum.value
+        let b=secondNum.value
+        let total=Number(a)-Number(b);
         document.getElementById("result").innerHTML="Result: "+total;
     }
     function multiplied() {
-        let firstNum=document.getElementById("num1").value;
-        let secondNum=document.getElementById("num2").value;
-        let total=Number(firstNum)*Number(secondNum);
+        let a=firstNum.value
+        let b=secondNum.value
+        let total=Number(a)*Number(b);
         document.getElementById("result").innerHTML="Result: "+total;
     }
     function divided() {
-        let firstNum=document.getElementById("num1").value;
-        let secondNum=document.getElementById("num2").value;
-        let total=Number(firstNum)/Number(secondNum);
+        let a=firstNum.value
+        let b=secondNum.value
+        let total=Number(a)/Number(b);
         document.getElementById("result").innerHTML="Result: "+total;
     }
 
