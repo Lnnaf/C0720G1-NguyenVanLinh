@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <script>
+        let username = prompt('Who there are ?','');
+        if (username == 'Admin'){
+            prompt('Input your password','')
+        }else if (username == 'TheMaster'){
+            alert('Welcome');
+        }else if (username == null){
+            alert('Permission Required - Access Denied')
+        }else{
+            alert("I don't know you ! Please try again")
+        }
+    </script>
+</body>

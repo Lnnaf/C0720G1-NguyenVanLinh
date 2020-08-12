@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <form>
+    <table>
+        <tr>
+            <th>Your weight</th>
+            <th>Your height</th>
+            <th>Your BMI</th>
+            <th>Your Interpretation</th>
+        </tr>
+        <tr>
+            <td><input id="urWeight"type="text" required="true"></td>
+            <td><input id="urHeight"type="text"></td>
+            <td><input id="urBmi"type="text"></td>
+            <td><input id="urInterpretation" type="text"></td>
+        </tr>
+    </table>
+</form>
+    <button onclick ="bmi()">RUN</button>
+    <button onclick ="clearFields()">CLEAR</button>
+    <script>
+        function bmi() {
+            let weight=document.getElementById("urWeight").value;
+            let height = document.getElementById("urHeight").value;
+            let bmi=weight/(height*height);
+            if (bmi < 16){
+                document.getElementById("urBmi")
+                urBmi.value=bmi; 
+                document.getElementById("urInterpretation")
+                urInterpretation.value=("Thin level III")
+            }else if(bmi>=16 && bmi<17){
+                document.getElementById("urBmi")
+                urBmi.value=bmi; 
+                document.getElementById("urInterpretation")
+                urInterpretation.value=("Thin level II")
+            }else if(bmi>=17 && bmi<18.5){
+                document.getElementById("urBmi")
+                urBmi.value=bmi; 
+                document.getElementById("urInterpretation")
+                urInterpretation.value=("Thin Level I");
+            }else if(bmi>=18.5 && bmi<25){
+                document.getElementById("urBmi")
+                urBmi.value=bmi; 
+                document.getElementById("urInterpretation")
+                urInterpretation.value=("Normal");
+            }else if(bmi>=25 && bmi<30){
+                document.getElementById("urBmi")
+                urBmi.value=bmi; 
+                document.getElementById("urInterpretation")
+                urInterpretation.value=("Over Weight");
+            }else if(bmi>=30 && bmi<35){
+                document.getElementById("urBmi")
+                urBmi.value=bmi; 
+                document.getElementById("urInterpretation")
+                urInterpretation.value=("Obese level I");
+            }else if(bmi>=35 && bmi<40){
+                document.getElementById("urBmi")
+                urBmi.value=bmi; 
+                document.getElementById("urInterpretation")
+                urInterpretation.value=("Obese level II");
+            }else if(bmi >40){
+            document.getElementById("urBmi")
+                urBmi.value=bmi; 
+                document.getElementById("urInterpretation")
+                urInterpretation.value=("Obese level III");
+            }
+    } 
+    function clearFields() {
+        document.getElementById("urWeight").value='';
+        document.getElementById("urHeight").value='';
+        document.getElementById("urBmi").value='';
+        document.getElementById("urInterpretation").value='';
+    }   
+        
+</script>
+</body>
+</html>
