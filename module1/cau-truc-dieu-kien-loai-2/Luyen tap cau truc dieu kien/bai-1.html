@@ -6,16 +6,11 @@
 </head>
 <body>
     <script>
-        let numA= prompt("Enter number a",'').value;
-        let numB= prompt("Enter number b",'').value;
-        a=parseInt(numA);
-        b=parseInt(numB);
-        total=a%b;
-        if(total === 0){
-            alert("OK")
-        }else {
-            alert("is not ok")
-        }
+        debugger
+        let numA=parseInt( prompt("Enter number a",''));
+        let numB=parseInt( prompt("Enter number b",''));
+        
+        (numA%numB == 0) ? alert("OK"):alert("is not ok");
     </script>
 </body>
 </html>

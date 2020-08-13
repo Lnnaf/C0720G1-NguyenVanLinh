@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ex2</title>
+</head>
+<body>
+    <script>
+        let min= parseInt( prompt("Nhap so phut da su dung"));
+        if(min<50){
+            result=min*600+25000
+            alert("Ban da dung: "+min+" phut, "+"So tien phai tra: "+result)
+        }else if(min<150){
+        result=(min-50)*400+(50*600)+25000
+        alert("Ban da dung: "+min+" phut, "+"So tien phai tra: "+result)
+        }else {
+            result=(min-200)*200+(50*600)+(150*400)+25000
+            alert("Ban da dung: "+min+" phut, "+"So tien phai tra: "+result)
+        }
+    </script>
+</body>
+</html>
