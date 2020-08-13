@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ex2</title>
+</head>
+<body>
+    <script>
+     let a= parseInt( prompt("Nhap so dien tieu thu (kWh)"));
+     if (a<50){//bac 1
+        let price=a*1678;
+        alert("so tien la= "+price);
+     }else if (a<100){//bac 2 
+         let price=(a-50)*1734+(50*1678);
+         alert("so tien la= "+price);
+     }else if(a<200){//bac 3
+         let price=(a-150)*2014+(50*1734)+(50*1678);
+         alert("so tien la= "+price);
+     }else if (a<300){// bac 4
+         let price=(a-200)*2536+(100*2014)+(50*1734)+(50*1678);
+         alert("so tien la= "+price);
+     }else if (a<400){//bac
+         let price=(a-300)*2834+(100*2536)+(100*2014)+(50*1734)+(50*1678);
+         alert("so tien la= "+price);
+     }else{
+         let price=(a-400)*2927+(100*2834)+(100*2536)+(100*2014)+(50*1734)+(50*1678);
+         alert("so tien la= "+price);
+     }
+    </script>
+</body>
+</html>

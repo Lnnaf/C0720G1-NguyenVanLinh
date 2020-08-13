@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ex2</title>
+</head>
+<body>
+    <script>
+        let money= parseInt( prompt("Enter money you wanna borrow"));
+        let date = parseInt( prompt("Enter time of borrow"));
+        let totalMoney=money*(Math.pow((1+7.3/100),date));
+        let n=parseFloat(totalMoney);
+        totalMoney=Math.round(n*10)/10;
+        alert("money you will have to pay is "+totalMoney+" VND");
+    </script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ex2</title>
+</head>
+<body>
+    <script>
+        let a= parseInt( prompt("enter a"));
+        let b= parseInt( prompt("enter b"));
+        let c= parseInt( prompt("enter c"));
+        let d=(b*b-4*a*c);  
+        if (d<0){
+            alert("Vo nghiem");
+        }else if (d==0){
+            let x=(-b/(2*a));
+            alert("phuong trinh co 1 nghiem x= "+x);
+        }else if(d>0){
+            let x1=-b+(Math.sqrt(d)/(2*a));
+            let x2=-(b-Math.sqrt(d)/(2*a));
+                alert("phuong trinh co 2 nghiem x1= "+x1+"x2= "+x2);
+        }
+        
+    </script>
+</body>
+</html>
