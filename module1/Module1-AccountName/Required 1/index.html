@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>account</title>
+</head>
+<body>
+<script>
+    debugger
+    let name=prompt('Họ và tên');
+    let idcard=prompt('Số CMND');
+    let dateOfBirth=prompt('Nhập ngày tháng năm sinh');
+    let email=prompt('Nhập Email');
+    let adress=prompt('Nhập địa chỉ của bạn');
+    let typeOfCustomer=prompt('Nhập loại khách hàng');
+    let vouncher=prompt('nhập ưu đãi giảm giá');
+    let amount=prompt('Nhap số lượng khách');
+    let rentDays=prompt('Nhap số ngày thuê');
+    let typeOfService=prompt('Nhập loại dịch vụ');
+    let typeOfRoom=prompt('Nhập loại phòng thuê');
+    let totalPay=typeOfService*rentDays*(1-(vouncher/100));
+    alert('Họ và tên: '+ name+ '\n'+ 'Số cmnd: '+ idcard+'\n'+'Ngày tháng năm sinh: '+dateOfBirth+'\n'+'Email: '+email+'\n'+'Địa chỉ: '+adress+'\n'+'Loại khách hàng: '+typeOfCustomer+'\n'
+    +'Số lượng: '+amount+'\n'+'Số ngày thuê: '+rentDays+'\n'+'Giá dịch vụ: '+typeOfService+'\n'+'Loai phòng thuê: '+typeOfRoom +'\n'+'Tổng giá: '+ totalPay)
+</script>
+</body>
+</html>

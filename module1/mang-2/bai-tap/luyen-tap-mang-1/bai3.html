@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    debugger
+    num=[1,2,10,5,6];
+    numMax=num[0];
+    let total=num[0]
+    for(let i=1;i<num.length;i++){
+        if(numMax<num[i]){
+            numMax=num[i];
+        }
+        total=total+num[i];
+    }console.log(numMax);
+    console.log(total/num.length);
+
+</script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h2>Gam Doan So</h2>
+<button onclick="playGame()">Choi game</button>
+<script>
+
+    function playGame() {
+        debugger
+        let firstNumber  = prompt("enter 1st number:");
+        let endNumber = prompt("enter 2nd number:");
+        let randomNumber = Math.floor((Math.random()*(endNumber-firstNumber+1))+firstNumber);
+
+            for(i=1;i<=3;i++){
+                let guessNumber =prompt("Enter number are you guess ?")
+                if (randomNumber==guessNumber){
+                    alert("Congratulation!. Correct")
+                    break;
+                }else if (guessNumber<randomNumber){
+                    alert("you need enter higher number")
+                }else {
+                    alert("you need enter lower number")
+                }
+            }alert("You have lose this game. Try again")
+    }
+</script>
+</body>
+</html>

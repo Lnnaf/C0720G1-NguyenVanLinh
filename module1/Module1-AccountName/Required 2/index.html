@@ -1,0 +1,206 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>account</title>
+</head>
+<body>
+<script>
+    debugger
+    let name="Nguyễn Văn Linh";
+    let idcard=123456;
+    let dateOfBirth="02/02/2222";
+    let email="abc@example.com";
+    let adress="Ngu Hanh Son";
+    let typeOfCustomer="member";
+    let vouncher="10";
+    let amount="3";
+    let rentDays="2";
+    let typeOfService="room";
+    let typeOfRoom="vip";
+    main();
+    function main(){
+        var choose= prompt("1.show"+"\n"+"2.edit"+"\n"+"3.total");
+        switch(choose){
+            case '1':
+                show();
+                break;
+            case '2':
+                edit();
+            case '3':
+                totalPay();
+                break;
+            default:
+                alert("fail")
+                main();
+        }
+    }
+    function show(){
+        alert("Họ và tên: "+name+"\n"+"CMND: "+idcard+"\n"+"Ngày tháng năm sinh: "+dateOfBirth+"\n"+"Email: "+email+"\n"+"Địa chỉ: "+adress+"\n"+
+            "Loại khách hàng"+typeOfCustomer+'\n'+'Giảm giá: '+vouncher+"%"+"\n"+"Số lượng khách: "+amount+"\n"+"Số ngày thuê: "+rentDays+"\n"+"Loại dịch vụ: "
+            +typeOfService+"\n"+"Loại phòng: "+typeOfRoom);
+        main();
+    }
+    function edit(){
+        var chooseEdit=prompt("1.Họ và tên: "+name+"\n"+"2.CMND: "+idcard+"\n"+"3.Ngày tháng năm sinh: "+dateOfBirth+"\n"+"4.Email: "+email+"\n"+"5. Địa chỉ: "+adress+"\n"+
+            "6. Loại khách hàng: "+typeOfCustomer+'\n'+'7. Giảm giá: '+vouncher+"%"+"\n"+"8. Số lượng khách: "+amount+"\n"+"9. Số ngày thuê: "+rentDays+"\n"+"10. Loại dịch vụ: "
+            +typeOfService+"\n"+"11. Loại phòng: "+typeOfRoom+"\n"+"12. -->Back to menu<--");
+
+        switch(chooseEdit){
+            case "1":
+                name = prompt("Ho va ten");
+                edit();
+                
+            case '2':
+                idcard= prompt("CMND:");
+                    edit();
+                
+            case '3':
+                dateOfBirth= prompt("Ngày tháng năm sinh:");
+                edit();
+                
+            case '4':
+                email= prompt("Email:");
+                edit();
+                
+            case '5':
+            adress= prompt("Địa chỉ:");
+                edit();
+                
+            case '6':
+            typeOfCustomerEdit= prompt("Loại khách hàng:");
+            checkTypeOfCustomer();
+                edit();
+                
+            case '7':
+            vouncher= prompt("Giảm giá:");
+                edit();
+               
+            case '8':
+            amount= prompt("Số lượng khách:");
+                edit();
+                
+            case '9':
+            rentDays= prompt("Số ngày thuê:");
+                edit();
+                
+            case '10':
+            typeOfServiceEdit= prompt("Loại dịch vụ:");
+            checkTypeOfService();
+                edit();
+                
+            case '11':
+            typeOfRoomEdit= prompt("Loại phòng:");
+            checkTypeOfRoom();
+                edit();
+                
+            case '12':
+                main();
+                        
+            default:
+                alert("failed")
+        }
+        edit();
+    }
+    function checkTypeOfCustomer(){
+        switch (typeOfCustomerEdit){
+            case 'Member':
+                typeOfCustomer=typeOfCustomerEdit;
+                break;
+            case 'Silver':
+                typeOfCustomer=typeOfCustomerEdit;
+                break;
+            case 'Gold':
+                typeOfCustomer=typeOfCustomerEdit;
+                break;
+            case 'Platinum':
+                typeOfCustomer=typeOfCustomerEdit;
+                break;
+            case 'Diamond':
+                typeOfCustomer=typeOfCustomerEdit;
+                break;
+            default:
+                alert("failed")
+                edit();
+        }
+    }
+    function checkTypeOfService(){
+        switch (typeOfServiceEdit){
+            case 'villa':
+                typeOfService=typeOfServiceEdit;
+                break;
+            case 'house':
+                typeOfService=typeOfServiceEdit;
+                break;
+            case 'room':
+                typeOfService=typeOfServiceEdit;
+                break;
+            default:
+                alert("failed")
+                edit();
+        }
+    }
+    function checkTypeOfRoom() {
+        switch (typeOfRoomEdit){
+            case 'vip':
+                typeOfRoom=typeOfRoomEdit;
+                break;
+            case 'business':
+                typeOfRoom=typeOfRoomEdit;
+                break;
+            case 'normal':
+                typeOfRoom=typeOfRoomEdit;
+                break;
+            default:
+                alert('failed');
+                edit();
+        }
+    }
+
+    function totalPay() {
+        let money = 0;
+        let temp=0
+        let currentYear=new Date().getFullYear();
+        let birthday = new Date(dateOfBirth).getFullYear();
+        let ageCustomer = currentYear-birthday;
+        if (typeOfService==="villa"){
+            money = 500;
+        }else if (typeOfService==="house"){
+            money = 300
+        }else if (typeOfService==="room"){
+            money = 100;
+        }
+        if (adress==="Đà Nẵng"){
+            temp+=20
+        }else if (adress==="Huế"){
+            temp+=10
+        }else if (adress==="Quảng Nam"){
+            temp+=5
+        }if (rentDays>7){
+            temp+=30;
+        }else if (rentDays>5){
+            temp+=20;
+        }else if (rentDays>2){
+            temp+=10;
+        }if (typeOfCustomer==="Diamond"){
+            temp+=15;
+        }else if (typeOfCustomer==="Platinum"){
+            temp+=10;
+        }else if (typeOfCustomer==="Gold"){
+            temp+=5;
+        }else if (typeOfCustomer==="Silver"){
+            temp+=2;
+        }else if (typeOfCustomer==="Member"){
+            temp+=0;
+        }if(ageCustomer>30&&adress==="Đà Nẵng"){
+            temp+=2;
+        }else if(ageCustomer>20&&adress==="Đà Nẵng"){
+            temp+=1;
+        }
+        let totalPay=money*rentDays*(1-temp/100);
+        alert(totalPay);
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    let strA=new Array();
+    let strB=[];
+    strA=prompt("string A");
+    strB=prompt("string B");
+    debugger
+    // a=strA.split(" ");
+    // b=strB.split(" ")
+    let count=0;
+    for(let i=0;i<strA.length;i++){
+        if(strA[i]==strB[i]){
+            count++
+            console.log(strA[i])
+        }
+    }if(count==strA.length){
+        console.log("ok")
+    }else{
+        console.log("wrong")
+    }
+
+
+
+
+</script>
+</body>
+</html>
