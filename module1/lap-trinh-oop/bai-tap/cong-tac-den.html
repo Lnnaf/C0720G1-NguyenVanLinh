@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<button id="btn-On" onclick="switchOn()">On</button>
+<button id="btn-Off" onclick="switchOff" >Off</button>
+<script>
+    class SwicthButton {
+        constructor(status){
+            this.status=status;
+        }
+        connectToLamp(EletricLamp){
+            if(this.status===false){
+                alert("Đã kết nối")
+            }else{
+                alert("Chưa có kết nối")
+            }
+        }
+        switchOff(){
+            return false;
+        }
+        switchOn(){
+            return true;
+        }
+    }
+    class EletricLamp{
+        constructor(status) {
+            this.status=status;
+        }
+        turnOff(){
+            alert("đèn đã tắt")
+        }
+        turnOn(){
+           alert("Đèn đã bật")
+        }
+    }
+    let Den=new EletricLamp(false);
+</script>
+</body>
+</html>

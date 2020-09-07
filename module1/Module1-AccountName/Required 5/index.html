@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<body>
+    <script>
+        let arrListCustomers = [];
+        displayMainMenu();
+
+        function displayMainMenu() {
+            let mainMenu = parseInt(prompt("1. Add New Customer. \n"+ "2. Display Information Customer. \n" + "3. Edit Information Customer. \n"+ 
+            "4. Delete Customer.\n"+ "5. Exit."));
+            switch (mainMenu) {
+                case 1:
+                    addNewCustomer();
+                    break;
+                case 2:
+                    displayCustomer();
+                    break;
+                case 3:
+                    editCustomer();
+                    break;
+                case 4:
+                    deleteCustomer();
+                    break;
+                case 5:
+                    break;
+            }
+
+        }
+
+        function addNewCustomer() {
+            let arrCustomer = [];
+            let name = prompt("Enter full name");
+            let idCard = prompt("Enter The ID card");
+            let dateOfBirth = prompt("Enter date of birth");
+            let email = prompt("Enter your e-mail");
+            let address = prompt("Enter your address");
+            let typeOfCustomer = prompt("Type of member card");
+            let voucher = prompt("Enter your voucher you have");
+            let amount = prompt("Enter how many guys come with you");
+            let rentDays = prompt("How many days you will stay ?");
+            let typeOfService = prompt("Which type of Service you choose ? ");
+            let typeOfRoom = prompt("Enter type of room");
+            arrCustomer.push(typeOfRoom);
+            arrCustomer.push(name);
+            arrCustomer.push(idCard);
+            arrCustomer.push(dateOfBirth);
+            arrCustomer.push(email);
+            arrCustomer.push(address);
+            arrCustomer.push(typeOfCustomer);
+            arrCustomer.push(amount);
+            arrCustomer.push(rentDays);
+            arrCustomer.push(typeOfService);
+            arrListCustomers.push(arrCustomer);
+            displayMainMenu();
+        }
+
+        function displayCustomer() {
+            let listCustomer = "";
+            for (let i = 0; i < arrListCustomers.length; i++) {
+                for (let j = 0; j < 1; j++) {
+                    listCustomer += (i + 1) + ". "  + arrListCustomers[i][j + 1] + "\n";
+                }
+            }
+            let choose = prompt("Enter name \n" + listCustomer);
+            for (let i = 0; i < arrListCustomers.length; i++) {
+
+                if (choose == arrListCustomers[i][0]) {
+                    displayInfoCustomer(i);
+                }
+
+            }
+            displayMainMenu();
+        }
+
+        function displayInfoCustomer(i) {
+            let customerInfo = "";
+            for (let j = 0; j < arrListCustomers[i].length; j++) {
+                customerInfo += (i + 1) + ". " + arrListCustomers[i][j] + "\n";
+            }
+            alert("All information of customer \n" + customerInfo);
+        }
+
+        function editCustomer() {
+            let listCustomer = "";
+            for (let i = 0; i < arrListCustomers.length; i++) {
+                for (let j = 0; j < 1; j++) {
+                    listCustomer += (i + 1) + ". " + arrListCustomers[i][j + 1] + "\n";
+                }
+            }
+            let choose = parseInt(prompt(listCustomer));
+            let chooseEdit = parseInt(prompt("1. Name : " + arrListCustomers[choose - 1][0] + "\n"
+                + "2. ID numbers : " + arrListCustomers[choose - 1][1] + "\n"
+                + "3. Date of birth : " + arrListCustomers[choose - 1][2] + "\n"
+                + "4. E-mail : " + arrListCustomers[choose - 1][3] + "\n"
+                + "5. Address : " + arrListCustomers[choose - 1][4] + "\n"
+                + "6. typeOfCustomer : " + arrListCustomers[choose - 1][5] + "\n"
+                + "7. voucher : " + arrListCustomers[choose - 1][6] + "\n"
+                + "8. amount : " + arrListCustomers[choose - 1][7] + "\n"
+                + "9. rentDays : " + arrListCustomers[choose - 1][8] + "\n"
+                + "10. typeOfService : " + arrListCustomers[choose - 1][9] + "\n"
+                + "11. typeOfRoom : " + arrListCustomers[choose - 1][10] + "\n"));
+            switch (chooseEdit) {
+                case 1:
+                    arrListCustomers[choose - 1][0] = prompt("Enter new name");
+                    break;
+                case 2:
+                    arrListCustomers[choose - 1][1] = prompt("Enter new Id Card");
+                    break;
+                case 3:
+                    arrListCustomers[choose - 1][2] = prompt("Enter new date of birth");
+                    break;
+                case 4:
+                    arrListCustomers[choose - 1][3] = prompt("Enter new email");
+                    break;
+                case 5:
+                    arrListCustomers[choose - 1][4] = prompt("Enter new address");
+                    break;
+                case 6:
+                    arrListCustomers[choose - 1][5] = prompt("Enter new typeOfCustomer");
+                    break;
+                case 7:
+                    arrListCustomers[choose - 1][6] = prompt("Enter new voucher");
+                    break;
+                case 8:
+                    arrListCustomers[choose - 1][7] = prompt("Enter new number of amounts");
+                    break;
+                case 9:
+                    arrListCustomers[choose - 1][8] = prompt("Enter new number of days");
+                    break;
+                case 10:
+                    arrListCustomers[choose - 1][9] = prompt("Enter new typeOfService");
+                    break;
+                case 11:
+                    arrListCustomers[choose - 1][10] = prompt("Enter new type of room");
+                    break;
+            }
+            displayMainMenu();
+        }
+
+        function deleteCustomer() {
+            let listCustomer = "";
+            for (let i = 0; i < arrListCustomers.length; i++) {
+                for (let j = 0; j < 1; j++) {
+                    listCustomer += (i + 1) + ". " + arrListCustomers[i][j + 1] + "\n";
+                }
+            }
+            let chooseDelete = parseInt(prompt(listCustomer));
+            if (chooseDelete == "" || chooseDelete == null) {
+                alert("you haven't deleted anyone")
+            } else {
+                let confirmDelete = confirm("are you confirm ? ");
+                if (confirmDelete) {
+                    arrListCustomers.splice(chooseDelete - 1, 1);
+                } else {
+                    alert("Failed");
+                }
+            }
+            displayMainMenu();
+        }
+
+    </script>
+</body>
+
+</html>

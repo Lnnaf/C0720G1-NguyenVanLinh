@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<body>
+    <script>
+
+        arrPoint = [];
+        for(let i=0; i<5;i++){
+            let n = prompt("")
+            arrPoint.push(n)
+        }
+        let numMax = arrPoint[0];
+        function findMax(a) {
+            for (let i = 1; i < a.length; i++) {
+                if (numMax < a[i]) {
+                    numMax = a[i];
+                } else {
+                    numMax = numMax;
+                }
+            }
+        }
+        findMax(arrPoint);
+        console.log(numMax);
+    </script>
+</body>
+
+</html>

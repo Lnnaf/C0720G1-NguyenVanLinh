@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>YÊU CẦU 4</title>
+</head>
+<body>
+<script>
+    let arrFullName = ["john","quicj","ken","Tmickun"];
+    
+    while (true){
+        let choose = parseInt(prompt("1. Hiển thị thông tin khách hàng" + "\n" +
+            "2. Thêm Khách Hàng. " + "\n" +
+            "3. Xóa Khách Hàng."));
+
+        switch (choose) {
+            case 1:
+                listCustomer1();
+                break;
+            case 2:
+                addCustumer();
+                break;
+            case 3:
+                deleteCustumer();
+                break;
+            default:
+                alert("Yêu cầu chọn sự lựa chon khác.")
+        }
+
+        function listCustomer1() {
+            let result ="";
+            arrFullName.sort();
+            for (let i = 0; i < arrFullName.length; i++){
+                result += (i+1) + ". " + arrFullName[i] + "\n"
+            }   alert("Danh sách khách hàng hiện tại là: " + "\n" + result);
+        }
+
+        function addCustumer() {
+            let numberCustumer = parseInt(prompt("Nhập số lượng khách hàng mà bạn muốn thêm."));
+            for (let i = 0; i < numberCustumer; i++){
+                let fullName = prompt("Nhập tên khách hàng. ");
+                arrFullName.push(fullName);
+            }
+            listCustomer1();
+        }
+        function deleteCustumer() {
+            let result ="";
+            arrFullName.sort();
+            for (let i = 0; i < arrFullName.length;i++) {
+                result += (i+1) + ". " + arrFullName[i] + "\n"
+            }
+            let vitriXoa = parseInt(prompt(result + "\n" + " Nhập vị trí muốn Xóa"));
+            if (vitriXoa > -1){
+                arrFullName.splice((vitriXoa-1),1);
+                listCustomer1();
+
+            }   else {
+                alert("Yếu cầu bạn nhập lại lựa chọn")
+            }
+
+        }
+    }
+</script>
+</body>
+</html>

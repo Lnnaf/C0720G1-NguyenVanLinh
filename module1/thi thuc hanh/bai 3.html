@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<body>
+    <script>
+        let fib = [];
+        fib[0] = 0;
+        fib[1] = 1;
+        let flag = 1;
+        let n = parseInt(prompt("Enter N to check N in fibonacci"));
+        let num = parseInt(prompt("Enter number of fibonacci"))
+        function fibonacci(num) {
+            for (let i = 2; i <= num; i++) {
+                fib[i] = fib[i - 2] + fib[i - 1];
+            }
+        } console.log(fib);
+        function isFibonacci(n) {
+            for (let i = 0; i < fib.length; i++) {
+                if (n === fib[i]) {
+                    console.log("true");
+                    break;
+                }
+                else {
+                    flag++
+                }
+            }
+            if (flag > fib.length) {
+                console.log("false")
+            }
+        }
+        fibonacci(num);
+        isFibonacci(n)
+    </script>
+
+</body>
+
+</html>

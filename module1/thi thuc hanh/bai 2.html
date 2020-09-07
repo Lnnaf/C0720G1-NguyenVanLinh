@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<body>
+    <script>
+        number = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+        let X = prompt("enter X");
+        function tryRemoveFromArray(X) {
+            let flag = 0;
+            for (let i = 0; i < number.length; i++) {
+                if (X === number[i]) {
+                    alert("number X is in the array");
+                    number.splice(i, 1);
+                    alert("this is all of number after your deleted: " + number);
+                    break;
+                } else {
+                    flag++
+                }
+            } if (flag > number.length) {
+                alert("X is not in the array")
+                alert("This is all of number: " + number);
+            }
+        }
+        tryRemoveFromArray(X);
+
+    </script>
+</body>
+
+</html>

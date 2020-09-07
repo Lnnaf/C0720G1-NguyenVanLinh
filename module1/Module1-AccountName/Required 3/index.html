@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>YÊU CẦU 3</title>
+</head>
+<body>
+<script>
+    let name;
+    let idCard ;
+    let dateOfBirth;
+    let email;
+    let address;
+    let typeOfCustomer;
+    let voucher;
+    let amount;
+    let rentDays;
+    let typeOfService;
+    let typeOfRoom;
+    let check = false;
+    let today = new Date();
+    let currentYear = today.getFullYear();
+
+    let tempname = "";
+    name = prompt("01.Nhập Họ và Tên khách hàng:");
+    name = name.trim().toLowerCase();
+    for (let i =0; i<name.length;i++){
+        if (name.charAt(i)=== " " && name.charAt(i+1) === " "){
+            continue;
+        }   if (i === 0 || name.charAt(i-1) === " "){
+            tempname = name.charAt(i).toLowerCase();
+            continue;
+        }
+        tempname += name.charAt(i);
+    }
+    name = tempname;
+
+    address = prompt("05.Địa chỉ khách hàng: ");
+
+    do {
+        idCard = prompt("02.Nhập Số CMND hoặc Thẻ căng cước: ");
+        if (!isNaN(idCard)){
+            idCard = Number.parseFloat(idCard);
+        }   if (!Number.isInteger(idCard)){
+            alert("Yêu cầu nhập lại số CMND");
+            continue;
+        }   if ((idCard <100000000) || (idCard > 999999999)){
+            alert("Yêu cầu nhập lại số CMND");
+            continue
+        }   check = true;
+    }   while (!check);
+    check = false;
+
+    do {
+        dateOfBirth = prompt("03.Nhập ngày tháng năm sinh Khách: " + "\n" + "Theo dạng 'MM/dd/yyyy' hoặc 'yyyy-MM-dd' hoặc 'dd/MM/yyyy'"  );
+        if (dateOfBirth.charAt(2)=== "/" && dateOfBirth.charAt(5)==="/"){
+            let day = dateOfBirth.substring(0,2);
+            let month = dateOfBirth.substring(3,5);
+            let year = dateOfBirth.substring(6,10);
+            if (!isNaN(day) && !isNaN(month) && !isNaN(year)){
+                day= Number.parseFloat(day);
+                month = Number.parseFloat(month);
+                year = Number.parseFloat(year);
+                if (Number.isInteger(day) && Number.isInteger(month) && Number.isInteger(year)){
+                    if (day < 32 && month < 13 && year >1800 && year< currentYear){
+                        check = true;
+                    }
+                }
+            }
+        }   if (!check){
+            alert("Yêu cầu bạn nhập lại thông tin")
+        }
+    } while (!check);
+    check =false;
+
+    do {
+        let countAt = 0;
+        let countDoc = 0;
+        email = prompt("04.Nhập địa chỉ Email: ");
+        for (let i=0; i<email.length;i++){
+            if (email.charAt(i) =="@"){
+                countAt++;
+                for (let j =0; j<email.length;i++){
+                    if (email.charAt(j)==="."){
+                        countDoc++;
+                    }
+                }
+            }
+        }   if (countAt!=1 ||countDoc<1){
+            alert("Yêu cầu bạn nhập lại đại chỉ Email.");
+        }   else {
+            check = true;
+        }
+    }   while (!check);
+    check = false;
+
+    do {
+        typeOfCustomer = prompt("06.Nhập Cấp độ khách hàng" +"\n" + "- Diamond, Platinum, Gold, Silver, Member");
+        if ((typeOfCustomer === Diamond) || (typeOfCustomer === Platinum) || (typeOfCustomer === Gold) || (typeOfCustomer === Silver) || (typeOfCustomer === Member)){
+            check = true;
+        }   if (!check){
+            alert("Yêu cầu bạn nhập lại thông tin.")
+        }
+    } while (!check);
+    check = false;
+
+    do {
+        voucher = prompt("07.Phần trăm chiết khấu: ");
+        if (!isNaN(voucher)){
+            voucher = Number.parseFloat(voucher);
+            if ((Number.isInteger(voucher)) && (voucher>0)){
+                check = true;
+            }
+        }   if (!check){
+            alert("Yêu cầu bạn nhập lại thông tin.")
+        }
+    } while (!check);
+    check =false;
+
+    do {
+        amount = prompt("08.Số lượng khách hàng: ");
+        if (!isNaN(amount)){
+            amount = Number.parseFloat(amount);
+            if ((Number.isInteger(amount)) && (amount>0)){
+                check = true;
+            }
+        }   if (!check){
+            alert("Yêu cầu bạn nhập lại thông tin.")
+        }
+    } while (!check);
+    check = false;
+
+
+    do {
+        rentDays = prompt("09.Số ngày thuê: ");
+        if (!isNaN(rentDays)){
+            rentDays = Number.parseFloat(rentDays);
+            if ((Number.isInteger(rentDays)) && (rentDays >0)){
+                check = true;
+            }
+        }   if (!check){
+            alert("Yêu cầu bạn nhập lại thông tin.")
+        }
+    } while (!check);
+    check = false;
+
+    do {
+        typeOfService = prompt("10.Loại hình dịch vụ" + "\n"+ "Villa, House, Room");
+        if ((typeOfService === Villa) || (typeOfService ===  House) || (typeOfService === Room)){
+            check = true;
+        }   if (!check){
+            alert("Yêu cầu bạn nhập lại thông tin.")
+        }
+    } while (!check);
+    check = false;
+
+    do {
+        typeOfRoom = prompt("11.Loại phòng khách cần thuê" + "\n" + "Vip, Business, Normal");
+        if ((typeOfRoom === Vip) || (typeOfRoom === Business) || (typeOfRoom === Normal)){
+            check = true;
+        }   if (!check){
+            alert("Yêu cầu bạn nhập lại thông tin.")
+        }
+    } while (!check);
+    check = false;
+
+
+</script>
+</body>
+</html>

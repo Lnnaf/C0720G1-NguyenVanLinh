@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<p id="show"></p>
+<script>
+    class worker {
+        constructor(name, dateOfBirth, address, money, position) {
+            this.name = name;
+            this.dateOfBirth = dateOfBirth;
+            this.address = address;
+            this.money = money;
+            this.position = position;
+        }
+       
+        setName(name) {
+            this.name = name;
+        }
+        getName() {
+            return this.name;
+        }
+        setDateOfBirth(dateOfBirth) {
+            this.dateOfBirth = dateOfBirth;
+        }
+        getDateOfBirth() {
+            return this.dateOfBirth;
+        }
+        setAddress(address) {
+            this.address = address;
+        }
+        getAddress() {
+            return this.address;
+        }
+        
+        setMoney(money) {
+            this.money = money;
+        }
+        getMoney() {
+            return this.money;
+        }
+        getPosition() {
+            return this.position;
+        }
+        setPosition(position) {
+            this.position = position;
+        }
+        getInfo() {
+            let string = "1. Name" + this.name + "\n 2. Date of birth: " + this.dateOfBirth +
+                "\n3. Address: " + this.address + "\n 4. Money: " + this.money+"\n 4. Position: " + this.position;
+            return string;
+        }
+        showInfo() {
+            let string = "1. Name" + this.name + "\n 2. Date of birth: " + this.dateOfBirth +
+                "\n3. Address: " + this.address + "\n 4. Money: " + this.money+"\n 4. Position: " + this.position;
+            alert(string);
+        }
+    }
+    let arrWorker = [];
+    let sv1 = new worker("Nguyen Van D", "10/02/2020", "quang nam","3000$","abc");
+    let sv2 = new worker("Nguyen Van B", "11/12/2020", "quang ngai","2000$","abc");
+    let sv3 = new worker("Nguyen Van C", "11/12/2020", "quang binh","1000$","abc");
+    arrWorker.push(sv1);
+    arrWorker.push(sv2);
+    arrWorker.push(sv3);
+    show(arrWorker);
+    
+    
+    function show(arrWorker) {
+        arrWorker.sort(function (a,b) {
+            let nameA=a.getName();
+            let nameB=b.getName();
+            if (nameA<nameB){
+                return -1
+            }else if (nameA>nameB){
+                return 1
+            }else {
+                return 0;
+            }
+        });
+        let table = '<table border="1">\n' +
+            '    <tr>\n' +
+            '        <th>STT</th>\n' +
+            '        <th>Name</th>\n' +
+            '        <th>Date of Birth</th>\n' +
+            '        <th>Address</th>\n' +
+            '        <th>Money</th>\n' +
+            '        <th>Position</th>\n' +
+            
+            '    </tr>';
+        for (let i = 0; i < arrWorker.length; i++) {
+            table += ' <tr>\n' +
+                '        <td>' + (i + 1) + '</td>\n' +
+                '        <td>' + arrWorker[i].getName() + '</td>\n' +
+                '        <td>' + arrWorker[i].getDateOfBirth() + '</td>\n' +
+                '        <td>' + arrWorker[i].getAddress() + '</td>\n' +
+                '        <td>' + arrWorker[i].getMoney() + '</td>\n' +
+                '        <td>' + arrWorker[i].getPosition() + '</td>\n' +
+                '    </tr>'
+        }
+        table += '</table>';
+        document.getElementById("show").innerHTML = table;
+    }
+</script>
+</body>
+</html>

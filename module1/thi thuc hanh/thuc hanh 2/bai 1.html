@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let numArr = prompt("Num of array")
+        let arrNum=[];
+        let total=0;
+        for(let i=0; i<numArr;i++){
+            if(numArr<=50){
+                arrNum[i]=prompt("enter");
+            }else{
+                alert ("Limited 50 ");
+                break;
+            }
+            
+        }
+        function divided(){
+            let flag=0;
+            for(let i=0; i<arrNum.length; i++){
+                if (arrNum[i]%3==0){
+                    total+=parseInt( arrNum[i]);
+                   flag++;              
+                }
+            }
+           let result=total/flag;
+           alert(result);
+        }
+        console.log(arrNum);
+        divided()
+    
+    </script>
+</body>
+</html>
