@@ -8,21 +8,23 @@ public class LinearEquationResolver {
         System.out.println("Given a equation as 'a*x+b=0'," +
                 "please enter constants: ");
         Scanner scanner = new Scanner(System.in);
-
+        double a, b, c;
         System.out.println("a: ");
-        double a = scanner.nextDouble();
+        a = scanner.nextDouble();
         System.out.println("b: ");
-        double b = scanner.nextDouble();
+        b = scanner.nextDouble();
         System.out.println("c: ");
-        double c = scanner.nextDouble();
+        c = scanner.nextDouble();
 
 
         if (a!=0){
-            double solution = -b/a;
-            System.out.println("The solution is "+ solution);
+            double answer = (c-b)/a;
+            System.out.println("Equation pass with x = "+ answer);
         }else {
             if (b == 0){
-                System.out.println("Equation pass with x =");
+                System.out.println("The solution is all x!");
+            }else{
+                System.out.println("No solution!");
             }
         }
     }
