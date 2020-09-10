@@ -15,14 +15,14 @@ public class AddElementToArray {
             index = sc.nextInt();
         } while (index <= 1 || index >= array.length-1);
 
-        for(int i = 0; i<array.length;i++){
-            if (index==array[i]){
-                array[i]=x;
-            }
+        //push element
+        for(int j=array.length-1;j>index;j--){
+            array[j]=array[j-1];
         }
-        for(int j=index;j<array.length-1;j++){
-            array[j-1]=array[j];
-        }
+        //replace element x
+
+        array[index]=x;
+
         for(int k = 0; k <array.length;k++){
             System.out.print(array[k]+"\t");
         }
