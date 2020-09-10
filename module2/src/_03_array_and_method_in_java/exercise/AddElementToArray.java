@@ -2,7 +2,7 @@ package _03_array_and_method_in_java.exercise;
 
 import java.util.Scanner;
 
-public class AddElementToClass {
+public class AddElementToArray {
     public static void main(String[] args) {
         int x, index;
         int[] array;
