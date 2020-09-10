@@ -9,8 +9,8 @@ public class PrintShapes {
         System.out.println("Menu");
         System.out.println("1. Draw the rectangle");
         System.out.println("2. Draw the triangle");
-        System.out.println("3. Draw the isosceles triangle ");
-        System.out.println("4. Exit");
+        System.out.println("3. Draw the reverse triangle ");
+        System.out.println("4. Draw isosceles triangle");
         System.out.println("Enter your choice: ");
         choice = sc.nextInt();
 
@@ -41,6 +41,15 @@ public class PrintShapes {
                 }
                 break;
             case 4:
+                for(int i =0; i<6;i++){
+                    for(int j = 0; j<(6-i); j++){
+                        System.out.print("  ");
+                    }
+                    for(int k = 0; k<2*i-1;k++){
+                        System.out.print("* ");
+                    }
+                    System.out.println("");
+                }
                 break;
         }
 
