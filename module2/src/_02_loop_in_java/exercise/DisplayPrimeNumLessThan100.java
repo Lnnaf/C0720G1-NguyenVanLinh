@@ -1,25 +1,24 @@
-package _02_loop_in_java.pratice;
+package _02_loop_in_java.exercise;
 
-import java.util.Scanner;
 
 public class DisplayPrimeNumLessThan100 {
     public static void main(String[] args) {
-        int  N=2;
-        while (N<100){
-            if(checkPrimeNumber(N)){
-                System.out.print(N+"\t");
+        int  n=2;
+        while (n<100){
+            if(checkPrimeNumber(n)){
+                System.out.print(n+"\t");
             }
-            N++;
+            n++;
         }
     }
 
-    public static boolean checkPrimeNumber(int N) {
-        if( N< 2 ){
+    public static boolean checkPrimeNumber(int n) {
+        if( n< 2 ){
             return false;
         }
-        int sqrt = (int) Math.sqrt(N);
+        int sqrt = (int) Math.sqrt(n);
         for(int i = 2; i <=sqrt; i++){
-            if (N%i == 0){
+            if (n%i == 0){
                 return false;
             }
         }

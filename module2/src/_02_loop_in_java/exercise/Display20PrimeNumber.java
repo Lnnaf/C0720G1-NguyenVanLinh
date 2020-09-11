@@ -1,19 +1,21 @@
-package _02_loop_in_java.pratice;
+package _02_loop_in_java.exercise;
 
 import java.util.Scanner;
 
 public class Display20PrimeNumber {
     public static void main(String[] args) {
-        int count=0, N=2, number;
+        int  n=2, number;
+        int count=0;
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter Number");
         number= sc.nextInt();
-        while (N<100){
-            if(checkPrimeNumber(N)){
-                System.out.print(N+"\t");
+        while (count<number){
+            if(checkPrimeNumber(n)){
+
+                System.out.print(n+"\t");
                 count++;
             }
-            N++;
+            n++;
         }
     }
 
