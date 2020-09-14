@@ -1,7 +1,7 @@
 package _04_class_object_in_java.exercise;
 
 public class Fan {
-    private static int slow = 1, medium = 2, fast = 3;
+    private static int SLOW = 1, MEDIUM = 2, FAST = 3;
     private int speed;
     private boolean on;
     private double radius ;
@@ -40,7 +40,7 @@ public class Fan {
         this.color = color;
     }
     public Fan() {
-        speed = fast;
+        speed = FAST;
         on=false;
         radius=10;
         color="blue";
@@ -48,32 +48,25 @@ public class Fan {
     }
 
     public static void main(String[] args) {
-        Fan Fan1 = new Fan();
-        Fan1.setSpeed(3);
-        Fan1.setOn(true);
-        Fan1.setRadius(10);
-        Fan1.setColor("Yellow");
-        display(Fan1);
-        Fan Fan2 = new Fan();
-        Fan2.setSpeed(2);
-        Fan2.setOn(false);
-        Fan2.setRadius(5);
-        Fan2.setColor("blue");
-        display(Fan2);
+        Fan fan1 = new Fan();
+        fan1.setSpeed(Fan.FAST);
+        fan1.setOn(true);
+        fan1.setRadius(10);
+        fan1.setColor("Yellow");
+        display(fan1);
 
     }
 
     public static void display( Fan nameFan) {
-        System.out.println("adad"+nameFan);
         switch (nameFan.speed){
             case 1:
-            System.out.println("Speed: Fast");
+            System.out.println("Speed: Slow");
             break;
             case 2:
                 System.out.println("Speed: Medium");
                 break;
             case 3:
-                System.out.println("Speed: Slow");
+                System.out.println("Speed: Fast");
         }
         if (nameFan.isOn()){
             System.out.println("Status: On");
