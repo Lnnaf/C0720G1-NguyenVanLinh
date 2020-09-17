@@ -5,5 +5,16 @@ public class Testing2 {
         Square square = new Square(2);
         System.out.println(square.toString());
         System.out.println(square.howToColor());
+        Shape[] arrayShape = new Shape[1];
+        arrayShape[0] = new Square();
+        for (Shape shapes : arrayShape) {
+            System.out.println(square.toString());
+
+            if (shapes instanceof Square) {
+                Colorable colorable = (Square) shapes;
+                System.out.println(colorable.howToColor());
+            }
+        }
     }
 }
+
