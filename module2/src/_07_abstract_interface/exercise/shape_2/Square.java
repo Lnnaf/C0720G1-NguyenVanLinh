@@ -1,6 +1,5 @@
 package _07_abstract_interface.exercise.shape_2;
 
-import org.w3c.dom.ls.LSOutput;
 
 public class Square extends Rectangle implements Colorable {
     public Square() {
@@ -42,7 +41,7 @@ public class Square extends Rectangle implements Colorable {
     }
 
     @Override
-    public String howToColor() {
-        return "Color all four side";
+    public void howToColor() {
+        System.out.println("Color all four side");
     }
 }

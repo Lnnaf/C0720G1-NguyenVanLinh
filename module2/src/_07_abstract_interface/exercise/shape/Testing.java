@@ -14,7 +14,7 @@ public class Testing {
         shapes[2]=circle.resize(percentRandomValue);
         System.out.println(Arrays.toString(shapes));
         System.out.println("Rectangle's area before resize: "+rectangle.getArea()+
-                " area after resize: "+ rectangle.resize(percentRandomValue));
+                "area after resize: "+ rectangle.resize(percentRandomValue));
         System.out.println("Square's area before resize: "+square.getArea()+
                 " area after resize: "+ square.resize(percentRandomValue));
         System.out.println("Circle's area before resize: "+circle.getArea()+
