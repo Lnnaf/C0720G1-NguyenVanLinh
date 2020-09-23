@@ -18,8 +18,6 @@ public class ReverseStack {
             stackBegin.push(scanner.nextInt());
         }
 
-
-
         System.out.println("Stack begin: "+stackBegin);
         Stack stackEnd = new Stack();
         while (!stackBegin.isEmpty()){
