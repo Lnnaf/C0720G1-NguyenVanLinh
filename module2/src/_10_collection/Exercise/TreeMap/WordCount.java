@@ -1,7 +1,5 @@
 package _09_Collection.Exercise.TreeMap;
 
-import java.util.Arrays;
-import java.util.Iterator;
 import java.util.Scanner;
 import java.util.TreeMap;
 
