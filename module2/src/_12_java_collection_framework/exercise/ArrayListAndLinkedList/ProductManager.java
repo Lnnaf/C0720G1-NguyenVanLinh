@@ -2,7 +2,7 @@ package _12_java_collection_framework.exercise.ArrayListAndLinkedList;
 
 import java.util.*;
 
-public class ProductManager {
+public class ProductManager  {
 
     private static Scanner scanner = new Scanner(System.in);
     private static List<Product> listProduct = new ArrayList();
@@ -21,8 +21,8 @@ public class ProductManager {
                     "\n3. Delete product by id." +
                     "\n4. Show product. " +
                     "\n5. Search product by name. " +
-                    "\n6. Search product by price decrease" +
-                    "\n7. Search product by price increase" +
+                    "\n6. Sort product by price decrease" +
+                    "\n7. Sort product by price increase" +
                     "\n8. exit.");
             System.out.println("Please input choose (1 - 8): ");
             choose = scanner.nextInt();
@@ -43,10 +43,10 @@ public class ProductManager {
                     searchProductByName();
                     break;
                 case 6:
-                    searchProductByPriceDecrease();
+                    sortProductByPriceDecrease();
                     break;
                 case 7:
-                    searchProductByPriceIncrease();
+                    sortProductByPriceIncrease();
                     break;
                 case 8:
                     System.exit(0);
@@ -59,10 +59,11 @@ public class ProductManager {
         
     }
 
-    private static void searchProductByPriceIncrease() {
+    private static void sortProductByPriceIncrease() {
+
     }
 
-    private static void searchProductByPriceDecrease() {
+    private static void sortProductByPriceDecrease() {
     }
 
     private static void searchProductByName() {
@@ -118,6 +119,7 @@ public class ProductManager {
         listProduct.add(product);
         System.out.println("Add complete!!!!.....");
     }
+
 
 }
 

@@ -1,6 +1,8 @@
 package _12_java_collection_framework.exercise.ArrayListAndLinkedList;
 
-public class Product {
+import java.util.*;
+
+public class Product implements Comparator<Product> {
 
     //properties product:
 
@@ -61,5 +63,10 @@ public class Product {
                 "id= " + idProduct  +
                 ", name= " + name +
                 ", price= " + priceProduct+" VND";
+    }
+
+    @Override
+    public int compare (Product product1st, Product product2nd) {
+        return product1st.getPriceProduct()
     }
 }
