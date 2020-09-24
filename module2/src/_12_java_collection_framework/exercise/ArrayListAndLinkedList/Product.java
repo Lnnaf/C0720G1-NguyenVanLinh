@@ -2,7 +2,7 @@ package _12_java_collection_framework.exercise.ArrayListAndLinkedList;
 
 import java.util.*;
 
-public class Product implements Comparator<Product> {
+public class Product {
 
     //properties product:
 
@@ -60,13 +60,9 @@ public class Product implements Comparator<Product> {
     @Override
     public String toString() {
         return
-                "id= " + idProduct  +
-                ", name= " + name +
-                ", price= " + priceProduct+" VND";
-    }
-
-    @Override
-    public int compare (Product product1st, Product product2nd) {
-        return product1st.getPriceProduct()
+                "id= " + idProduct +
+                        ", name= " + name +
+                        ", price= " + priceProduct + " VND";
     }
 }
+

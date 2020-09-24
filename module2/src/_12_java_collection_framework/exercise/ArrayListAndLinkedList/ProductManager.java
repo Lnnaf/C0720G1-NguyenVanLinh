@@ -2,7 +2,7 @@ package _12_java_collection_framework.exercise.ArrayListAndLinkedList;
 
 import java.util.*;
 
-public class ProductManager  {
+public class ProductManager extends Product {
 
     private static Scanner scanner = new Scanner(System.in);
     private static List<Product> listProduct = new ArrayList();
@@ -60,7 +60,8 @@ public class ProductManager  {
     }
 
     private static void sortProductByPriceIncrease() {
-
+        Collections.sort(listProduct,Comparator.comparing(Product::getPriceProduct));
+        showProducts();
     }
 
     private static void sortProductByPriceDecrease() {
@@ -101,7 +102,7 @@ public class ProductManager  {
                 System.out.println("Enter name: ");
                 String nameEdited = scanner.next();
                 System.out.println("Enter price: ");
-                Double priceEdited = scanner.nextDouble();
+                double priceEdited = scanner.nextDouble();
                 listProduct.set(i+1,new Product(nameEdited,priceEdited));
             }
         }
@@ -118,6 +119,7 @@ public class ProductManager  {
         Product product = new Product(idProduct, name, priceProduct);
         listProduct.add(product);
         System.out.println("Add complete!!!!.....");
+        showProducts();
     }
 
 
