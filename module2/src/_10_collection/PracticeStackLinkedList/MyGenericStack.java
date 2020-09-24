@@ -1,4 +1,4 @@
-package _09_Collection.PracticeStackLinkedList;
+package _10_collection.PracticeStackLinkedList;
 
 import java.util.EmptyStackException;
 import java.util.LinkedList;

@@ -7,8 +7,8 @@ public abstract class Service {
         this.id = id;
     }
 
-     void showInfor() {
-    }
+     public abstract void showInfor();
+
 
     public static void main(String[] args) {
         House house = new House("1");

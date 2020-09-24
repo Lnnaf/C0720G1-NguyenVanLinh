@@ -6,7 +6,9 @@ public class Villa extends Service {
     }
 
     @Override
-    void showInfor() {
-        System.out.println(id+". "+"this is villa");
+    public void showInfor() {
+
     }
+
+
 }

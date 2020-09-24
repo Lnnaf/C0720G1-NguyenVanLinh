@@ -1,7 +1,7 @@
-package _09_Collection.PracticeQueueLinkedList;
+package _10_collection.PracticeQueueLinkedList;
 
 import _09_Collection.MyLinkedList.MyLinkedList;
-import _09_Collection.PracticeStackLinkedList.MyGenericStack;
+import _10_collection.PracticeStackLinkedList.MyGenericStack;
 
 public class Node {
     public int key;
