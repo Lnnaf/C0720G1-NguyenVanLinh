@@ -29,7 +29,7 @@ public class SearchString {
             }
 
 
-            for (Character ch: max) { 
+            for (Character ch: max) {
                 System.out.print(ch);
             }
             System.out.println();
