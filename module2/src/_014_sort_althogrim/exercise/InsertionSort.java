@@ -36,12 +36,7 @@ public class InsertionSort {
                 arrayNum[insertPosition] = insertValue;
             }
             System.out.println("vong lap thu: "+index);
-            System.out.print("[");
-            for(int j =0;j<arrayNum.length;j++){
-                System.out.print(arrayNum[j]+"\t");
-            }
-            System.out.print("]");
-            System.out.println("");
+            System.out.println(Arrays.toString(arrayNum));
         }
     }
 }

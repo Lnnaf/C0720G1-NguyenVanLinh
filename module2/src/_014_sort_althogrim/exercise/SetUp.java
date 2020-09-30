@@ -1,5 +1,6 @@
 package _014_sort_althogrim.exercise;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class SetUp {
@@ -35,8 +36,6 @@ public class SetUp {
         }
     }
     public static void display(int [] arrayNum){
-        for (int index = 0; index < arrayNum.length; index++){
-            System.out.print(arrayNum[index]+"\t");
-        }
+        System.out.println(Arrays.toString(arrayNum));
     }
 }
