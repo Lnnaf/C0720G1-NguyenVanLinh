@@ -1,13 +1,10 @@
 package Models;
 
 public class Room extends Service {
-    public Room(String id) {
 
-        super(id);
-    }
-
+    private ExtraService serviceFreeGoWith;
     @Override
-    public void showInfor() {
+    public void showInFor() {
 
     }
 }
