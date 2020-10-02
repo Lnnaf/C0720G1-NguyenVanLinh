@@ -1,6 +1,6 @@
 package _015_io_text.exercise.demo_io_text;
 
-import java.io.*;
+import  java.io.*;
 import java.util.Scanner;
 
 public class Demo {
