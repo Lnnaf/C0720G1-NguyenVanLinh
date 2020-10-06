@@ -1,27 +1,32 @@
 package Controllers;
 
 import Models.House;
+import Models.Villa;
+import org.apache.commons.csv.CSVFormat;
+import org.apache.commons.csv.CSVParser;
+import org.apache.commons.csv.CSVPrinter;
+import org.apache.commons.csv.CSVRecord;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 
 public class MainController {
-    public static final String FILE_PATH_HOUSE = "src/Data/House.csv";
-    public static final String FILE_PATH_ROOM = "src/Data/Room.csv";
-    public static final String FILE_PATH_VILLA = "src/Data/Villa.csv";
-    public static final String REGEX = ",";
+    public static final String FILE_PATH_VILLA = "C:\\Users\\vanli\\Desktop\\C0720G1-NguyenVanLinh\\FuramaResort\\src\\Data\\Villa.csv";
+    public static final String[] HEADER = {"Id", "FullName", "AreaUsed", "PriceRent", "MaxPeople", "TypeOfRent", "Standard", "OtherComfort", "AreaPool", "NumOfFloor"};
+    protected static List<Villa> listVilla = new ArrayList<>();
     static Scanner scanner = new Scanner(System.in);
-    private static int id=0;
+    public static Villa villaModel = new Villa();
 
     public MainController() {
     }
 
     public static void displayMainMenu() {
-        boolean check = true;
-        while (check) {
+        while (true) {
             System.out.println("*****************************");
             System.out.println("1. Add New Service. " + "\n2. Show Service." + "\n3. Add New Customer"
                     + "\n4. Show Information Customer" + "\n5. Add New Booking" + "\n6. Show Information of Employee"
@@ -64,11 +69,28 @@ public class MainController {
         inputChooseOfShowService = scanner.nextInt();
         switch (inputChooseOfShowService){
             case 1:
-                System.out.println(House.readHouseCSV());
+                showAllVilla();
                 break;
             case 2:
             case 3:
         }
+    }
+
+    private static List showAllVilla()  {
+        List<String> listReaded = new ArrayList<>();
+        BufferedReader reader;
+        try {
+            reader = Files.newBufferedReader(Paths.get(FILE_PATH_VILLA));
+        CSVParser csvParser = new CSVParser(reader, CSVFormat.DEFAULT.withHeader(HEADER).withIgnoreHeaderCase(false).withTrim());
+        for(CSVRecord csvRecord:csvParser){
+            for(int i=0; i<csvRecord.size();i++)
+            listReaded.add(csvRecord.get(i));
+        }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return listReaded;
     }
 
     public static void addNewServices() {
@@ -97,50 +119,57 @@ public class MainController {
     }
 
     private static void addNewRoom() {
-        try {
-            FileWriter writeRoomData = new FileWriter(FILE_PATH_ROOM,true);
-            BufferedWriter bfRoomData = new BufferedWriter(writeRoomData);
-            scanner.nextLine();
-            System.out.println("Enter New Room");
-            String newDataRoom = scanner.nextLine();
-            bfRoomData.write(++id+REGEX+newDataRoom);
-            bfRoomData.newLine();
-            bfRoomData.close();
-        }catch (IOException e){
-            System.err.println("File does Exist, should be create a new file!");
-        }
 
     }
 
     private static void addNewHouse() {
-        try {
-            FileWriter writeHouseData = new FileWriter(FILE_PATH_HOUSE,true);
-            BufferedWriter bfHouseData = new BufferedWriter(writeHouseData);
-            scanner.nextLine();
-            System.out.println("Enter New House");
-            String newDataHouse = scanner.nextLine();
-            bfHouseData.write(++id+REGEX+newDataHouse);
-            bfHouseData.newLine();
-            bfHouseData.close();
-        }catch (IOException e){
-            System.err.println("File does Exist, should be create a new file!");
-        }
 
     }
 
     private static void addNewVilla() {
+        scanner.nextLine();
+        System.out.println("1. ENTER ID.");
+        villaModel.setId(scanner.nextLine());
+        System.out.println("2. ENTER NAME OF SERVICE. ");
+        villaModel.setNameOfService(scanner.nextLine());
+        System.out.println("3. ENTER AREA FOR USE. ");
+        villaModel.setAreaUsed(scanner.nextDouble());
+        scanner.nextLine();
+        System.out.println("4. ENTER PRICE. ");
+        villaModel.setPriceRent(scanner.nextDouble());
+        scanner.nextLine();
+        System.out.println("5. ENTER AMOUNT PEOPLE. ");
+        villaModel.setMaximumPeople(Integer.parseInt(scanner.nextLine()));
+        System.out.println("6. ENTER TYPE OF RENTS . ");
+        villaModel.setTypeOfRent(scanner.nextLine());
+        System.out.println("7. ENTER STANDARD. ");
+        villaModel.setStandard(scanner.nextLine());
+        System.out.println("8. ENTER OTHER COMFORT. ");
+        villaModel.setOtherComfort(scanner.nextLine());
+        System.out.println("9. ENTER AREA POOL. ");
+        villaModel.setAreaPool(scanner.nextDouble());
+        scanner.nextLine();
+        System.out.println("10. ENTER NUMBER OF FLOOR. ");
+        villaModel.setNumOfFloors(Integer.parseInt(scanner.nextLine()));
+
+        Villa villa = new Villa(villaModel.getId(), villaModel.getNameOfService(),villaModel.getAreaUsed(),villaModel.getPriceRent(),
+                villaModel.getMaximumPeople(),villaModel.getTypeOfRent(),villaModel.getStandard(),villaModel.getOtherComfort(),
+                villaModel.getAreaPool(),villaModel.getNumOfFloors());
         try {
-            FileWriter writeVillaData = new FileWriter(FILE_PATH_VILLA,true);
-            BufferedWriter bfVillaData = new BufferedWriter(writeVillaData);
-            scanner.nextLine();
-            System.out.println("Enter New Villa");
-            String newDataVilla = scanner.nextLine();
-            bfVillaData.write(++id+REGEX+newDataVilla);
-            bfVillaData.newLine();
-            bfVillaData.close();
-        }catch (IOException e){
-            System.err.println("File does Exist, should be create a new file!");
+            Writer writer = Files.newBufferedWriter(Paths.get(FILE_PATH_VILLA));
+            CSVPrinter csvPrinter = new CSVPrinter(writer, CSVFormat.DEFAULT.withHeader(HEADER));
+            listVilla.add(villa);
+           for(Villa villa1 :listVilla ){
+               csvPrinter.printRecord(villa1.getId(),villa1.getNameOfService(),villa1.getAreaUsed(),villa1.getPriceRent(),
+                       villa1.getMaximumPeople(),villa1.getTypeOfRent(),villa1.getStandard(),villa1.getOtherComfort(),
+                       villa1.getAreaPool(), villa1.getNumOfFloors());
+           }
+            csvPrinter.flush();
+            csvPrinter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+
 
     }
 

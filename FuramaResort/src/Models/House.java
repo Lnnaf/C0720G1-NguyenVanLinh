@@ -2,7 +2,7 @@ package Models;
 
 
 public class House extends Service {
-    /*-	Riêng Villa sẽ có thêm thông tin: Tiêu chuẩn phòng, Mô tả tiện nghi khác, Diện tích hồ bơi, Số tầng.*/
+
     private String standard;
     private String otherComfort;
     private int numOfFloors;
@@ -43,11 +43,11 @@ public class House extends Service {
 
     @Override
     public String toString() {
-        return "House{" +
+        return "House{" +super.toString()+
                 "standard='" + standard + '\'' +
                 ", otherComfort='" + otherComfort + '\'' +
                 ", numOfFloors=" + numOfFloors +
-                '}'+super.toString();
+                '}';
     }
 
     @Override
