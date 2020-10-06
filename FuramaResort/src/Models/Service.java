@@ -44,7 +44,7 @@ public abstract class Service implements ServicePlus {
         return areaUsed;
     }
 
-    public void setAreaUsed(double areaUser) {
+    public void setAreaUsed(Double areaUser) {
         this.areaUsed = areaUser;
     }
 
