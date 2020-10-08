@@ -3,50 +3,50 @@ package Models;
 
 public class House extends Service {
 
-    private String standard;
-    private String otherComfort;
-    private int numOfFloors;
+    private String standardHouse;
+    private String otherComfortHouse;
+        private String numOfFloorsHouse;
 
     public House() {
     }
 
-    public House(String id, String fullName, double areaUser, int priceRent, int maximumPeople, String typeOfRent, String standard, String otherComfort, int numOfFloors) {
+    public House(String id, String fullName, String areaUser, String priceRent, String maximumPeople, String typeOfRent, String standardHouse, String otherComfortHouse, String numOfFloorsHouse) {
         super(id, fullName, areaUser, priceRent, maximumPeople, typeOfRent);
-        this.standard = standard;
-        this.otherComfort = otherComfort;
-        this.numOfFloors = numOfFloors;
+        this.standardHouse = standardHouse;
+            this.otherComfortHouse = otherComfortHouse;
+        this.numOfFloorsHouse = numOfFloorsHouse;
     }
 
-    public String getStandard() {
-        return standard;
+    public String getStandardHouse() {
+        return standardHouse;
     }
 
-    public void setStandard(String standard) {
-        this.standard = standard;
+    public void setStandardHouse(String standardHouse) {
+        this.standardHouse = standardHouse;
     }
 
-    public String getOtherComfort() {
-        return otherComfort;
+    public String getOtherComfortHouse() {
+        return otherComfortHouse;
     }
 
-    public void setOtherComfort(String otherComfort) {
-        this.otherComfort = otherComfort;
+    public void setOtherComfortHouse(String otherComfortHouse) {
+        this.otherComfortHouse = otherComfortHouse;
     }
 
-    public int getNumOfFloors() {
-        return numOfFloors;
+    public String getNumOfFloorsHouse() {
+        return numOfFloorsHouse;
     }
 
-    public void setNumOfFloors(int numOfFloors) {
-        this.numOfFloors = numOfFloors;
+    public void setNumOfFloorsHouse(String numOfFloorsHouse) {
+        this.numOfFloorsHouse = numOfFloorsHouse;
     }
 
     @Override
     public String toString() {
         return "House{" +super.toString()+
-                "standard='" + standard + '\'' +
-                ", otherComfort='" + otherComfort + '\'' +
-                ", numOfFloors=" + numOfFloors +
+                "standard='" + standardHouse + '\'' +
+                ", otherComfort='" + otherComfortHouse + '\'' +
+                ", numOfFloors=" + numOfFloorsHouse +
                 '}';
     }
 

@@ -1,20 +1,18 @@
 package Models;
 
-import java.util.List;
-
 public abstract class Service implements ServicePlus {
     /*Tất cả các dịch vụ này sẽ bao có các thông tin: Tên dịch vụ, Diện tích sử dụng,
      Chi phí thuê, Số lượng người tối đa, Kiểu thuê (bao gồm thuê theo năm, tháng, ngày, giờ).*/
     protected String id;
     protected String nameOfService;
-    protected double areaUsed;
-    protected double priceRent;
-    protected int maximumPeople;
+    protected String areaUsed;
+    protected String priceRent;
+    protected String maximumPeople;
     protected String typeOfRent;
 
-    public Service(String id, String nameOfService, double areaUsed, double priceRent, int maximumPeople, String typeOfRent) {
+    public Service(String id, String nameOfService, String areaUsed, String priceRent, String maximumPeople, String typeOfRent) {
         this.id = id;
-            this.nameOfService = nameOfService;
+        this.nameOfService = nameOfService;
         this.areaUsed = areaUsed;
         this.priceRent = priceRent;
         this.maximumPeople = maximumPeople;
@@ -40,27 +38,27 @@ public abstract class Service implements ServicePlus {
         this.nameOfService = fullName;
     }
 
-    public double getAreaUsed() {
+    public String getAreaUsed() {
         return areaUsed;
     }
 
-    public void setAreaUsed(Double areaUser) {
+    public void setAreaUsed(String areaUser) {
         this.areaUsed = areaUser;
     }
 
-    public double getPriceRent() {
+    public String getPriceRent() {
         return priceRent;
     }
 
-    public void setPriceRent(double priceRent) {
+    public void setPriceRent(String priceRent) {
         this.priceRent = priceRent;
     }
 
-    public int getMaximumPeople() {
+    public String getMaximumPeople() {
         return maximumPeople;
     }
 
-    public void setMaximumPeople(int maximumPeople) {
+    public void setMaximumPeople(String maximumPeople) {
         this.maximumPeople = maximumPeople;
     }
 

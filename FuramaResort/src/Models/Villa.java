@@ -1,15 +1,15 @@
 package Models;
 
-public class Villa extends Service {
+public class Villa extends Service  {
     private String standard;
     private String otherComfort;
-    private double areaPool;
-    private int numOfFloors;
+    private String areaPool;
+    private String numOfFloors;
 
     public Villa() {
     }
 
-    public Villa(String id, String fullName, double areaUsed, double priceRent, int maximumPeople, String typeOfRent, String standard, String otherComfort, double areaPool, int numOfFloors) {
+    public Villa(String id, String fullName, String areaUsed, String priceRent, String maximumPeople, String typeOfRent, String standard, String otherComfort, String areaPool, String numOfFloors) {
         super(id, fullName, areaUsed, priceRent, maximumPeople, typeOfRent);
         this.standard = standard;
         this.otherComfort = otherComfort;
@@ -36,19 +36,19 @@ public class Villa extends Service {
         this.otherComfort = otherComfort;
     }
 
-    public double getAreaPool() {
+    public String getAreaPool() {
         return areaPool;
     }
 
-    public void setAreaPool(double areaPool) {
+    public void setAreaPool(String areaPool) {
         this.areaPool = areaPool;
     }
 
-    public int getNumOfFloors() {
+    public String getNumOfFloors() {
         return numOfFloors;
     }
 
-    public void setNumOfFloors(int numOfFloors) {
+    public void setNumOfFloors(String numOfFloors) {
         this.numOfFloors = numOfFloors;
     }
 
@@ -65,7 +65,5 @@ public class Villa extends Service {
                 ", areaPool=" + areaPool +
                 ", numOfFloors=" + numOfFloors ;
     }
-
-
 
 }

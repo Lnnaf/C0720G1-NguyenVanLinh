@@ -1,28 +1,30 @@
 package Controllers;
 
+import Commons.NameException;
+import Commons.Validator;
+import Models.Customer;
 import Models.House;
+import Models.Room;
 import Models.Villa;
-import org.apache.commons.csv.CSVFormat;
-import org.apache.commons.csv.CSVParser;
-import org.apache.commons.csv.CSVPrinter;
-import org.apache.commons.csv.CSVRecord;
 
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.OpenOption;
-import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
 
 public class MainController {
-    public static final String FILE_PATH_VILLA = "C:\\Study\\C0720G1-NguyenVanLinh\\FuramaResort\\src\\Data\\Villa.csv";
-    public static final String[] HEADER = {"Id", "FullName", "AreaUsed", "PriceRent", "MaxPeople", "TypeOfRent", "Standard", "OtherComfort", "AreaPool", "NumOfFloor"};
-    protected static List<Villa> listVilla = new ArrayList<>();
+    public static final String FILE_PATH_VILLA = "src/Data/Villa.csv";
+    public static final String FILE_PATH_HOUSE = "src/Data/House.csv";
+    public static final String FILE_PATH_ROOM = "src/Data/Room.csv";
+    public static final String FILE_PATH_CUSTOMER = "src/Data/Customer.csv";
+
     static Scanner scanner = new Scanner(System.in);
     public static Villa villaModel = new Villa();
+    public static House houseModel = new House();
+    public static Room roomModel = new Room();
+    public static Customer customerModel = new Customer();
 
     public static void displayMainMenu() {
         while (true) {
@@ -39,7 +41,7 @@ public class MainController {
                     showService();
                     break;
                 case 3:
-                    System.out.println("3");
+                    addNewCustomer();
                     break;
                 case 4:
                     System.out.println("4");
@@ -59,14 +61,129 @@ public class MainController {
 
     }
 
+    private static void addNewCustomer() {
+        //**Họ tên Customer, Ngày sinh, Giới tính, Số CMND, Số ĐT, Email,
+        //Loại khách, Địa chỉ và thuộc tính sử dụng dịch vụ có kiểu đối tượng là Services**//
+        boolean check = false;
+        try {
+            do {
+            try {
+                    scanner.nextLine();
+                    System.out.println("1. ENTER NAME.");
+                    String inputName = scanner.nextLine();
+                    check = Validator.regexNameOfCustomer(inputName);
+                    if (check) {
+                        customerModel.setNameOfCustomer(inputName);
+                        break;
+                    } else {
+                        throw new NameException("");
+                    }
+                
+            }catch (InputMismatchException|NameException e){
+                System.out.println(e.getMessage());
+            }
+            } while (!check);
+            check = false;
+            do {
+                System.out.println("2. ENTER NAME OF SERVICE. ");
+                String inputNameService = scanner.nextLine();
+                check = Validator.regexNameService(inputNameService);
+                if (check) {
+                    roomModel.setNameOfService(inputNameService);
+                    break;
+                } else {
+                    System.out.println("Wrong format warnning, please try again!");
+                }
+            } while (!check);
+            check = false;
+            do {
+                System.out.println("3. ENTER AREA FOR USE. ");
+                String inputAreaUse = scanner.nextLine();
+                check = Validator.regexAreaOfUse(inputAreaUse);
+                if (check) {
+                    roomModel.setAreaUsed(inputAreaUse);
+                    break;
+                } else {
+                    System.out.println("Wrong format warnning, please try again!");
+                }
+            } while (!check);
+            check = false;
+            do {
+                System.out.println("4. ENTER PRICE. ");
+                String inputPrice = scanner.nextLine();
+                check = Validator.regexPriceRent(inputPrice);
+                if (check) {
+                    roomModel.setPriceRent(inputPrice);
+                    break;
+                } else {
+                    System.out.println("Wrong format warnning, please try again!");
+                }
+            } while (!check);
+
+            check = false;
+            do {
+                System.out.println("5. ENTER NUMBER OF PEOPLE. ");
+                String inputNumOfPeople = scanner.nextLine();
+                check = Validator.regexMaxPeople(inputNumOfPeople);
+                if (check) {
+                    roomModel.setMaximumPeople(inputNumOfPeople);
+                    break;
+                } else {
+                    System.out.println("Wrong format warnning, please try again!");
+                }
+            } while (!check);
+
+            check = false;
+            do {
+                System.out.println("6. ENTER TYPE OF RENTS . ");
+                String typeOfRent = scanner.nextLine();
+                check = Validator.regexRentalType(typeOfRent);
+                if (check) {
+                    roomModel.setTypeOfRent(typeOfRent);
+                    break;
+                } else {
+                    System.out.println("Wrong format warnning, please try again!");
+                }
+            } while (!check);
+
+            check = false;
+            do {
+                System.out.println("7. ENTER FREE SERVICE IN SITE . ");
+                String typeOfRent = scanner.nextLine();
+                check = Validator.regexRentalType(typeOfRent);
+                if (check) {
+                    roomModel.setServiceFreeInSite(typeOfRent);
+                    break;
+                } else {
+                    System.out.println("Wrong format warnning, please try again!");
+                }
+            } while (!check);
+
+            Room room = new Room(roomModel.getId(), roomModel.getNameOfService(), roomModel.getAreaUsed(), roomModel.getPriceRent(),
+                    roomModel.getMaximumPeople(), roomModel.getTypeOfRent(),roomModel.getServiceFreeInSite());
+
+
+            String line = room.getId() + "," + room.getNameOfService() + "," + room.getAreaUsed() + "," + room.getPriceRent() + "," +
+                    room.getMaximumPeople() + "," + room.getTypeOfRent() + ","+room.getServiceFreeInSite() + "\n";
+
+
+            FileWriter fileWriter = new FileWriter(FILE_PATH_ROOM, true);
+            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+            bufferedWriter.write(line);
+            bufferedWriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     private static void showService() {
         int inputChooseOfShowService;
-        System.out.println("1. Show all Villa"+"\n2. Show all house"+"\n3. Show all room"+
-                "\n4. Show all Name Villa Not Duplicate"+
-                "\n5. Show all Name House Not Duplicate"+
+        System.out.println("1. Show all Villa" + "\n2. Show all house" + "\n3. Show all room" +
+                "\n4. Show all Name Villa Not Duplicate" +
+                "\n5. Show all Name House Not Duplicate" +
                 "\n6. Show all Name Room Not Duplicate");
         inputChooseOfShowService = scanner.nextInt();
-        switch (inputChooseOfShowService){
+        switch (inputChooseOfShowService) {
             case 1:
                 showAllVilla();
                 break;
@@ -75,25 +192,25 @@ public class MainController {
         }
     }
 
-    protected static void showAllVilla()  {
-        BufferedReader reader;
+    protected static void showAllVilla() {
         try {
-            reader = Files.newBufferedReader(Paths.get(FILE_PATH_VILLA));
-        CSVParser csvParser = new CSVParser(reader, CSVFormat.EXCEL.withHeader(HEADER).withSkipHeaderRecord().withTrim());
-        for(CSVRecord csvRecord:csvParser){
-            villaModel.setId(csvRecord.get(0));
-            villaModel.setNameOfService(csvRecord.get(1));
-            villaModel.setAreaUsed(Double.parseDouble(csvRecord.get(2)));
-            villaModel.setPriceRent(Double.parseDouble(csvRecord.get(3)));
-            villaModel.setMaximumPeople(Integer.parseInt(csvRecord.get(4)));
-            villaModel.setTypeOfRent(csvRecord.get(5));
-            villaModel.setStandard(csvRecord.get(6));
-            villaModel.setOtherComfort(csvRecord.get(7));
-            villaModel.setAreaPool(Double.parseDouble(csvRecord.get(8)));
-            villaModel.setNumOfFloors(Integer.parseInt(csvRecord.get(9)));
 
-            villaModel.showInFor();
-        }
+            FileReader fileReader = new FileReader(FILE_PATH_VILLA);
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+            List<Villa> listVilla = new ArrayList<>();
+            String temp = null;
+            String[] line = null;
+            while ((temp = bufferedReader.readLine()) != null) {
+                line = temp.split(",");
+                Villa villa = new Villa(line[0], line[1], line[2], line[3], line[4], line[5],
+                        line[6], line[7], line[8], line[9]);
+                listVilla.add(villa);
+            }
+            for (Villa villa1 : listVilla) {
+                villa1.showInFor();
+            }
+
+            bufferedReader.close();
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -106,7 +223,7 @@ public class MainController {
                 "\n2.Add New House " + "\n3.Add New Room" + "\n4.Back to menu" +
                 "\n5.Exit");
         int inputChooseOfAddNewServices = scanner.nextInt();
-        switch (inputChooseOfAddNewServices){
+        switch (inputChooseOfAddNewServices) {
             case 1:
                 addNewVilla();
                 break;
@@ -126,53 +243,381 @@ public class MainController {
     }
 
     private static void addNewRoom() {
+        boolean check;
+        try {
+            do {
+                scanner.nextLine();
+                System.out.println("1. ENTER ID.");
+                String inputID = scanner.nextLine();
+                check = Validator.regexId(inputID);
+                if (check) {
+                    roomModel.setId(inputID);
+                    break;
+                } else {
+                    System.out.println("Wrong format warnning, please try again!");
+                }
+            } while (!check);
+            check = false;
+            do {
+                System.out.println("2. ENTER NAME OF SERVICE. ");
+                String inputNameService = scanner.nextLine();
+                check = Validator.regexNameService(inputNameService);
+                if (check) {
+                    roomModel.setNameOfService(inputNameService);
+                    break;
+                } else {
+                    System.out.println("Wrong format warnning, please try again!");
+                }
+            } while (!check);
+            check = false;
+            do {
+                System.out.println("3. ENTER AREA FOR USE. ");
+                String inputAreaUse = scanner.nextLine();
+                check = Validator.regexAreaOfUse(inputAreaUse);
+                if (check) {
+                    roomModel.setAreaUsed(inputAreaUse);
+                    break;
+                } else {
+                    System.out.println("Wrong format warnning, please try again!");
+                }
+            } while (!check);
+            check = false;
+            do {
+                System.out.println("4. ENTER PRICE. ");
+                String inputPrice = scanner.nextLine();
+                check = Validator.regexPriceRent(inputPrice);
+                if (check) {
+                    roomModel.setPriceRent(inputPrice);
+                    break;
+                } else {
+                    System.out.println("Wrong format warnning, please try again!");
+                }
+            } while (!check);
+
+            check = false;
+            do {
+                System.out.println("5. ENTER NUMBER OF PEOPLE. ");
+                String inputNumOfPeople = scanner.nextLine();
+                check = Validator.regexMaxPeople(inputNumOfPeople);
+                if (check) {
+                    roomModel.setMaximumPeople(inputNumOfPeople);
+                    break;
+                } else {
+                    System.out.println("Wrong format warnning, please try again!");
+                }
+            } while (!check);
+
+            check = false;
+            do {
+                System.out.println("6. ENTER TYPE OF RENTS . ");
+                String typeOfRent = scanner.nextLine();
+                check = Validator.regexRentalType(typeOfRent);
+                if (check) {
+                    roomModel.setTypeOfRent(typeOfRent);
+                    break;
+                } else {
+                    System.out.println("Wrong format warnning, please try again!");
+                }
+            } while (!check);
+
+            check = false;
+            do {
+                System.out.println("7. ENTER FREE SERVICE IN SITE . ");
+                String typeOfRent = scanner.nextLine();
+                check = Validator.regexRentalType(typeOfRent);
+                if (check) {
+                    roomModel.setServiceFreeInSite(typeOfRent);
+                    break;
+                } else {
+                    System.out.println("Wrong format warnning, please try again!");
+                }
+            } while (!check);
+
+            Room room = new Room(roomModel.getId(), roomModel.getNameOfService(), roomModel.getAreaUsed(), roomModel.getPriceRent(),
+                    roomModel.getMaximumPeople(), roomModel.getTypeOfRent(),roomModel.getServiceFreeInSite());
+
+
+            String line = room.getId() + "," + room.getNameOfService() + "," + room.getAreaUsed() + "," + room.getPriceRent() + "," +
+                    room.getMaximumPeople() + "," + room.getTypeOfRent() + ","+room.getServiceFreeInSite() + "\n";
+
+
+            FileWriter fileWriter = new FileWriter(FILE_PATH_ROOM, true);
+            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+            bufferedWriter.write(line);
+            bufferedWriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
 
     private static void addNewHouse() {
+        boolean check;
+        try {
+            String inputNameService;
+            String inputAreaUse;
+            do {
+                scanner.nextLine();
+                System.out.println("1. ENTER ID.");
+                String inputID = scanner.nextLine();
+                check = Validator.regexId(inputID);
+                if (check) {
+                    houseModel.setId(inputID);
+                    break;
+                } else {
+                    System.out.println("Wrong format warnning, please try again!");
+                }
+            } while (!check);
+            check = false;
+            do {
+                System.out.println("2. ENTER NAME OF SERVICE. ");
+                inputNameService = scanner.nextLine();
+                check = Validator.regexNameService(inputNameService);
+                if (check) {
+                    houseModel.setNameOfService(inputNameService);
+                    break;
+                } else {
+                    System.out.println("Wrong format warnning, please try again!");
+                }
+            } while (!check);
+            check = false;
+            do {
+                System.out.println("3. ENTER AREA FOR USE. ");
+                inputAreaUse = scanner.nextLine();
+                check = Validator.regexAreaOfUse(inputAreaUse);
+                if (check) {
+                    houseModel.setAreaUsed(inputAreaUse);
+                    break;
+                } else {
+                    System.out.println("Wrong format warnning, please try again!");
+                }
+            } while (!check);
+            check = false;
+            do {
+                System.out.println("4. ENTER PRICE. ");
+                String inputPrice = scanner.nextLine();
+                check = Validator.regexPriceRent(inputPrice);
+                if (check) {
+                    houseModel.setPriceRent(inputPrice);
+                    break;
+                } else {
+                    System.out.println("Wrong format warnning, please try again!");
+                }
+            } while (!check);
+
+            check = false;
+            do {
+                System.out.println("5. ENTER NUMBER OF PEOPLE. ");
+                String inputNumOfPeople = scanner.nextLine();
+                check = Validator.regexMaxPeople(inputNumOfPeople);
+                if (check) {
+                    houseModel.setMaximumPeople(inputNumOfPeople);
+                    break;
+                } else {
+                    System.out.println("Wrong format warnning, please try again!");
+                }
+            } while (!check);
+
+            check = false;
+            do {
+                System.out.println("6. ENTER TYPE OF RENTS . ");
+                String typeOfRent = scanner.nextLine();
+                check = Validator.regexRentalType(typeOfRent);
+                if (check) {
+                    houseModel.setTypeOfRent(typeOfRent);
+                    break;
+                } else {
+                    System.out.println("Wrong format warnning, please try again!");
+                }
+            } while (!check);
+
+            check = false;
+            do {
+                System.out.println("7. ENTER STANDARD . ");
+                String inputStandard = scanner.nextLine();
+                check = Validator.regexStandard(inputStandard);
+                if (check) {
+                    houseModel.setStandardHouse(inputStandard);
+                    break;
+                } else {
+                    System.out.println("Wrong format warnning, please try again!");
+                }
+            } while (!check);
+
+
+            System.out.println("8. ENTER OTHER COMFORT. ");
+            String inputOtherComfort = scanner.nextLine();
+            houseModel.setOtherComfortHouse(inputOtherComfort);
+
+            check = false;
+            do {
+                System.out.println("9. ENTER NUMBER OF FLOOR. ");
+                String inputNumOfFloor = scanner.nextLine();
+                check = Validator.regexFloor(inputNumOfFloor);
+                if (check) {
+                    houseModel.setNumOfFloorsHouse(inputNumOfFloor);
+                    break;
+                } else {
+                    System.out.println("Wrong format warnning, please try again!");
+                }
+            } while (!check);
+
+            House house = new House(houseModel.getId(), houseModel.getNameOfService(), houseModel.getAreaUsed(), houseModel.getPriceRent(),
+                    houseModel.getMaximumPeople(), houseModel.getTypeOfRent(), houseModel.getStandardHouse(), houseModel.getOtherComfortHouse(), houseModel.getNumOfFloorsHouse());
+
+
+            String line = house.getId() + "," + house.getNameOfService() + "," + house.getAreaUsed() + "," + house.getPriceRent() + "," +
+                    house.getMaximumPeople() + "," + house.getTypeOfRent() + "," + house.getStandardHouse() + "," + house.getOtherComfortHouse() + "," + house.getNumOfFloorsHouse() + "\n";
+
+
+            FileWriter fileWriter = new FileWriter(FILE_PATH_HOUSE, true);
+            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+            bufferedWriter.write(line);
+            bufferedWriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
 
     private static void addNewVilla() {
-        scanner.nextLine();
-        System.out.println("1. ENTER ID.");
-        villaModel.setId(scanner.nextLine());
-        System.out.println("2. ENTER NAME OF SERVICE. ");
-        villaModel.setNameOfService(scanner.nextLine());
-        System.out.println("3. ENTER AREA FOR USE. ");
-        villaModel.setAreaUsed(scanner.nextDouble());
-        scanner.nextLine();
-        System.out.println("4. ENTER PRICE. ");
-        villaModel.setPriceRent(scanner.nextDouble());
-        scanner.nextLine();
-        System.out.println("5. ENTER AMOUNT PEOPLE. ");
-        villaModel.setMaximumPeople(Integer.parseInt(scanner.nextLine()));
-        System.out.println("6. ENTER TYPE OF RENTS . ");
-        villaModel.setTypeOfRent(scanner.nextLine());
-        System.out.println("7. ENTER STANDARD. ");
-        villaModel.setStandard(scanner.nextLine());
-        System.out.println("8. ENTER OTHER COMFORT. ");
-        villaModel.setOtherComfort(scanner.nextLine());
-        System.out.println("9. ENTER AREA POOL. ");
-        villaModel.setAreaPool(scanner.nextDouble());
-        scanner.nextLine();
-        System.out.println("10. ENTER NUMBER OF FLOOR. ");
-        villaModel.setNumOfFloors(Integer.parseInt(scanner.nextLine()));
-
-        Villa villa = new Villa(villaModel.getId(), villaModel.getNameOfService(),villaModel.getAreaUsed(),villaModel.getPriceRent(),
-                villaModel.getMaximumPeople(),villaModel.getTypeOfRent(),villaModel.getStandard(),villaModel.getOtherComfort(),
-                villaModel.getAreaPool(),villaModel.getNumOfFloors());
+        boolean check;
         try {
-            Writer writer = Files.newBufferedWriter(Paths.get(FILE_PATH_VILLA),StandardOpenOption.APPEND);
-            CSVPrinter csvPrinter = new CSVPrinter(writer, CSVFormat.DEFAULT);
-            listVilla.add(villa);
-           for(Villa villa1 :listVilla ){
-               csvPrinter.printRecord(villa1.getId(),villa1.getNameOfService(),villa1.getAreaUsed(),villa1.getPriceRent(),
-                       villa1.getMaximumPeople(),villa1.getTypeOfRent(),villa1.getStandard(),villa1.getOtherComfort(),
-                       villa1.getAreaPool(), villa1.getNumOfFloors());
-           }
-            csvPrinter.flush();
-            csvPrinter.close();
+            String inputID;
+            String inputNameService;
+            String inputAreaUse;
+            do {
+                scanner.nextLine();
+                System.out.println("1. ENTER ID.");
+                inputID = scanner.nextLine();
+                check = Validator.regexId(inputID);
+                if (check) {
+                    villaModel.setId(inputID);
+                    break;
+                } else {
+                    System.out.println("Wrong format warnning, please try again!");
+                }
+            } while (!check);
+            check = false;
+            do {
+                System.out.println("2. ENTER NAME OF SERVICE. ");
+                inputNameService = scanner.nextLine();
+                check = Validator.regexNameService(inputNameService);
+                if (check) {
+                    villaModel.setNameOfService(inputNameService);
+                    break;
+                } else {
+                    System.out.println("Wrong format warnning, please try again!");
+                }
+            } while (!check);
+            check = false;
+            do {
+                System.out.println("3. ENTER AREA FOR USE. ");
+                inputAreaUse = scanner.nextLine();
+                check = Validator.regexAreaOfUse(inputAreaUse);
+                if (check) {
+                    villaModel.setAreaUsed(inputAreaUse);
+                    break;
+                } else {
+                    System.out.println("Wrong format warnning, please try again!");
+                }
+            } while (!check);
+            check = false;
+            do {
+                System.out.println("4. ENTER PRICE. ");
+                String inputPrice = scanner.nextLine();
+                check = Validator.regexPriceRent(inputPrice);
+                if (check) {
+                    villaModel.setPriceRent(inputPrice);
+                    break;
+                } else {
+                    System.out.println("Wrong format warnning, please try again!");
+                }
+            } while (!check);
+
+            check = false;
+            do {
+                System.out.println("5. ENTER NUMBER OF PEOPLE. ");
+                String inputNumOfPeople = scanner.nextLine();
+                check = Validator.regexMaxPeople(inputNumOfPeople);
+                if (check) {
+                    villaModel.setMaximumPeople(inputNumOfPeople);
+                    break;
+                } else {
+                    System.out.println("Wrong format warnning, please try again!");
+                }
+            } while (!check);
+
+            check = false;
+            do {
+                System.out.println("6. ENTER TYPE OF RENTS . ");
+                String typeOfRent = scanner.nextLine();
+                check = Validator.regexRentalType(typeOfRent);
+                if (check) {
+                    villaModel.setTypeOfRent(typeOfRent);
+                    break;
+                } else {
+                    System.out.println("Wrong format warnning, please try again!");
+                }
+            } while (!check);
+
+            check = false;
+            do {
+                System.out.println("7. ENTER STANDARD. ");
+                String inputStandard = scanner.nextLine();
+                check = Validator.regexStandard(inputStandard);
+                if (check) {
+                    villaModel.setStandard(inputStandard);
+                    break;
+                } else {
+                    System.out.println("Wrong format warnning, please try again!");
+                }
+            } while (!check);
+
+
+            System.out.println("8. ENTER OTHER COMFORT. ");
+            String inputOtherComfort = scanner.nextLine();
+            villaModel.setOtherComfort(inputOtherComfort);
+
+            check = false;
+            do {
+                System.out.println("9. ENTER AREA POOL. ");
+                String inputAreaPool = scanner.nextLine();
+                check = Validator.regexAreaPool(inputAreaPool);
+                if (check) {
+                    villaModel.setAreaPool(inputAreaPool);
+                    break;
+                } else {
+                    System.out.println("Wrong format warnning, please try again!");
+                }
+            } while (!check);
+
+            check = false;
+            do {
+                System.out.println("10. ENTER NUMBER OF FLOOR. ");
+                String inputNumOfFloor = scanner.nextLine();
+                check = Validator.regexFloor(inputNumOfFloor);
+                if (check) {
+                    villaModel.setNumOfFloors(inputNumOfFloor);
+                    break;
+                } else {
+                    System.out.println("Wrong format warnning, please try again!");
+                }
+            } while (!check);
+
+            Villa villa = new Villa(villaModel.getId(), villaModel.getNameOfService(), villaModel.getAreaUsed(), villaModel.getPriceRent(),
+                    villaModel.getMaximumPeople(), villaModel.getTypeOfRent(), villaModel.getStandard(), villaModel.getOtherComfort(),
+                    villaModel.getAreaPool(), villaModel.getNumOfFloors());
+
+
+            String line = villa.getId() + "," + villa.getNameOfService() + "," + villa.getAreaUsed() + "," + villa.getPriceRent() + "," +
+                    villa.getMaximumPeople() + "," + villa.getTypeOfRent() + "," + villa.getStandard() + "," + villa.getOtherComfort() + "," +
+                    villa.getAreaPool() + "," + villa.getNumOfFloors() + "\n";
+
+            FileWriter fileWriter = new FileWriter(FILE_PATH_VILLA, true);
+            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+            bufferedWriter.write(line);
+            bufferedWriter.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
