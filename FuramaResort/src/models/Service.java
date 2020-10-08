@@ -1,6 +1,6 @@
-package Models;
+package models;
 
-public abstract class Service implements ServicePlus {
+public abstract class Service {
     /*Tất cả các dịch vụ này sẽ bao có các thông tin: Tên dịch vụ, Diện tích sử dụng,
      Chi phí thuê, Số lượng người tối đa, Kiểu thuê (bao gồm thuê theo năm, tháng, ngày, giờ).*/
     protected String id;
@@ -82,19 +82,6 @@ public abstract class Service implements ServicePlus {
                 ;
     }
 
-    @Override
-    public void name() {
-    }
-
-    @Override
-    public void unit() {
-
-    }
-
-    @Override
-    public void price() {
-
-    }
 
     public abstract void showInFor();
 }

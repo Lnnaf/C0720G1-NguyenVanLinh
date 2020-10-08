@@ -1,10 +1,10 @@
-package Models;
+package models;
 
 public class Customer {
     private String nameOfCustomer;
     private String dateOfBirth;
     private String gene;
-    private int idCard;
+    private String idCard;
     private int phoneNumber;
     private String email;
     private String typeOfCustomer;
@@ -14,7 +14,7 @@ public class Customer {
     public Customer() {
     }
 
-    public Customer(String nameOfCustomer, String dateOfBirth, String gene, int idCard, int phoneNumber, String email, String typeOfCustomer, String address, Models.Service service) {
+    public Customer(String nameOfCustomer, String dateOfBirth, String gene, String idCard, int phoneNumber, String email, String typeOfCustomer, String address, models.Service service) {
         this.nameOfCustomer = nameOfCustomer;
         this.dateOfBirth = dateOfBirth;
         this.gene = gene;
@@ -50,11 +50,11 @@ public class Customer {
         this.gene = gene;
     }
 
-    public int getIdCard() {
+    public String getIdCard() {
         return idCard;
     }
 
-    public void setIdCard(int idCard) {
+    public void setIdCard(String idCard) {
         this.idCard = idCard;
     }
 
@@ -90,11 +90,11 @@ public class Customer {
         this.address = address;
     }
 
-    public Models.Service getService() {
+    public models.Service getService() {
         return Service;
     }
 
-    public void setService(Models.Service service) {
+    public void setService(models.Service service) {
         Service = service;
     }
 

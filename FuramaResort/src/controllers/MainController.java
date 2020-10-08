@@ -1,17 +1,13 @@
-package Controllers;
+package controllers;
 
-import Commons.NameException;
-import Commons.Validator;
-import Models.Customer;
-import Models.House;
-import Models.Room;
-import Models.Villa;
+import commons.*;
+import models.Customer;
+import models.House;
+import models.Room;
+import models.Villa;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.InputMismatchException;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 
 public class MainController {
@@ -67,7 +63,7 @@ public class MainController {
         boolean check = false;
         try {
             do {
-            try {
+                try {
                     scanner.nextLine();
                     System.out.println("1. ENTER NAME.");
                     String inputName = scanner.nextLine();
@@ -78,93 +74,130 @@ public class MainController {
                     } else {
                         throw new NameException("");
                     }
-                
-            }catch (InputMismatchException|NameException e){
-                System.out.println(e.getMessage());
-            }
-            } while (!check);
-            check = false;
-            do {
-                System.out.println("2. ENTER NAME OF SERVICE. ");
-                String inputNameService = scanner.nextLine();
-                check = Validator.regexNameService(inputNameService);
-                if (check) {
-                    roomModel.setNameOfService(inputNameService);
-                    break;
-                } else {
-                    System.out.println("Wrong format warnning, please try again!");
+
+                } catch (InputMismatchException | NameException e) {
+                    System.out.println(e.getMessage());
                 }
             } while (!check);
             check = false;
+//input date of birth
             do {
-                System.out.println("3. ENTER AREA FOR USE. ");
-                String inputAreaUse = scanner.nextLine();
-                check = Validator.regexAreaOfUse(inputAreaUse);
-                if (check) {
-                    roomModel.setAreaUsed(inputAreaUse);
-                    break;
-                } else {
-                    System.out.println("Wrong format warnning, please try again!");
-                }
-            } while (!check);
-            check = false;
-            do {
-                System.out.println("4. ENTER PRICE. ");
-                String inputPrice = scanner.nextLine();
-                check = Validator.regexPriceRent(inputPrice);
-                if (check) {
-                    roomModel.setPriceRent(inputPrice);
-                    break;
-                } else {
-                    System.out.println("Wrong format warnning, please try again!");
+                try {
+                    System.out.println("2. ENTER DATE OF BIRTH.");
+                    String inputBirthday = scanner.nextLine();
+                    check = Validator.regexDateOfBirth(inputBirthday);
+
+                    if (check) {
+                        String[] arrDate = inputBirthday.split("/");
+                        int year = Calendar.getInstance().get(Calendar.YEAR);
+                        int yearInput = Integer.parseInt(arrDate[2]);
+                        if (yearInput > 1900 && year - yearInput >= 18) {
+                            customerModel.setDateOfBirth(inputBirthday);
+                            break;
+                        } else {
+                            check = false;
+                            throw new BirthdayException("");
+                        }
+                    } else {
+                        throw new BirthdayException("");
+                    }
+                } catch (InputMismatchException | BirthdayException e) {
+                    System.out.println(e.getMessage());
                 }
             } while (!check);
 
             check = false;
+//input gender
             do {
-                System.out.println("5. ENTER NUMBER OF PEOPLE. ");
-                String inputNumOfPeople = scanner.nextLine();
-                check = Validator.regexMaxPeople(inputNumOfPeople);
-                if (check) {
-                    roomModel.setMaximumPeople(inputNumOfPeople);
-                    break;
-                } else {
-                    System.out.println("Wrong format warnning, please try again!");
+                try {
+                    System.out.println("3. ENTER GENDER.");
+                    String inputGene = scanner.nextLine();
+                    String tempInputGender = inputGene.toLowerCase();
+                    check = Validator.regexGender(tempInputGender);
+                    if (check) {
+                        char first = Character.toUpperCase(tempInputGender.charAt(0));
+                        inputGene = first+tempInputGender.substring(1);
+                        customerModel.setGene(inputGene);
+                        break;
+                    } else {
+                        throw new GenderException("");
+                    }
+                } catch (InputMismatchException | GenderException e) {
+                    System.out.println(e.getMessage());
+                }
+            } while (!check);
+            check = false;
+// INPUT ID CARD
+            do {
+                try {
+                    System.out.println("4. ENTER ID CARD.");
+                    String inputIDCard = scanner.nextLine();
+                    check = Validator.regexIDCard(inputIDCard);
+                    if (check) {
+                        customerModel.setIdCard(inputIDCard);
+                        break;
+                    } else {
+                        throw new IDCardException("");
+                    }
+                } catch (InputMismatchException | IDCardException e) {
+                    System.out.println(e.getMessage());
+                }
+            } while (!check);
+// INPUT PHONE NUMBER
+            int inputPhoneNumber=0;
+           do {
+                System.out.println("5. ENTER PHONE NUMBER.");
+                try {
+                    inputPhoneNumber = Integer.parseInt(scanner.nextLine());
+                    check=true;
+
+                } catch (NumberFormatException e) {
+                    System.out.println("Please enter only number");
+                    check=false;
+                }
+            }while (!check);
+            customerModel.setPhoneNumber(inputPhoneNumber);
+            check=false;
+            // INPUT EMAIL
+            do {
+                try {
+                    System.out.println("5. ENTER EMAIL.");
+                    String inputEmail = scanner.nextLine();
+                    check = Validator.regexEmail(inputEmail);
+                    if (check) {
+                        customerModel.setEmail(inputEmail);
+                        break;
+                    } else {
+                        throw new EmailException("");
+                    }
+                } catch (InputMismatchException | EmailException e) {
+                    System.out.println(e.getMessage());
+                }
+            } while (!check);
+            check=false;
+            do {
+                try {
+                    System.out.println("6. ENTER TYPE OF CUSTOMER.");
+                    String inputEmail = scanner.nextLine();
+                    check = Validator.regexEmail(inputEmail);
+                    if (check) {
+                        customerModel.setEmail(inputEmail);
+                        break;
+                    } else {
+                        throw new EmailException("");
+                    }
+                } catch (InputMismatchException | EmailException e) {
+                    System.out.println(e.getMessage());
                 }
             } while (!check);
 
-            check = false;
-            do {
-                System.out.println("6. ENTER TYPE OF RENTS . ");
-                String typeOfRent = scanner.nextLine();
-                check = Validator.regexRentalType(typeOfRent);
-                if (check) {
-                    roomModel.setTypeOfRent(typeOfRent);
-                    break;
-                } else {
-                    System.out.println("Wrong format warnning, please try again!");
-                }
-            } while (!check);
-
-            check = false;
-            do {
-                System.out.println("7. ENTER FREE SERVICE IN SITE . ");
-                String typeOfRent = scanner.nextLine();
-                check = Validator.regexRentalType(typeOfRent);
-                if (check) {
-                    roomModel.setServiceFreeInSite(typeOfRent);
-                    break;
-                } else {
-                    System.out.println("Wrong format warnning, please try again!");
-                }
-            } while (!check);
 
             Room room = new Room(roomModel.getId(), roomModel.getNameOfService(), roomModel.getAreaUsed(), roomModel.getPriceRent(),
-                    roomModel.getMaximumPeople(), roomModel.getTypeOfRent(),roomModel.getServiceFreeInSite());
+                    roomModel.getMaximumPeople(), roomModel.getTypeOfRent(), roomModel.getServiceFreeInSite());
 
 
             String line = room.getId() + "," + room.getNameOfService() + "," + room.getAreaUsed() + "," + room.getPriceRent() + "," +
-                    room.getMaximumPeople() + "," + room.getTypeOfRent() + ","+room.getServiceFreeInSite() + "\n";
+                    room.getMaximumPeople() + "," + room.getTypeOfRent() + "," + room.getServiceFreeInSite() + "\n";
 
 
             FileWriter fileWriter = new FileWriter(FILE_PATH_ROOM, true);
@@ -234,7 +267,6 @@ public class MainController {
                 addNewRoom();
                 break;
             case 4:
-                displayMainMenu();
                 break;
             case 5:
                 System.exit(0);
@@ -334,11 +366,11 @@ public class MainController {
             } while (!check);
 
             Room room = new Room(roomModel.getId(), roomModel.getNameOfService(), roomModel.getAreaUsed(), roomModel.getPriceRent(),
-                    roomModel.getMaximumPeople(), roomModel.getTypeOfRent(),roomModel.getServiceFreeInSite());
+                    roomModel.getMaximumPeople(), roomModel.getTypeOfRent(), roomModel.getServiceFreeInSite());
 
 
             String line = room.getId() + "," + room.getNameOfService() + "," + room.getAreaUsed() + "," + room.getPriceRent() + "," +
-                    room.getMaximumPeople() + "," + room.getTypeOfRent() + ","+room.getServiceFreeInSite() + "\n";
+                    room.getMaximumPeople() + "," + room.getTypeOfRent() + "," + room.getServiceFreeInSite() + "\n";
 
 
             FileWriter fileWriter = new FileWriter(FILE_PATH_ROOM, true);

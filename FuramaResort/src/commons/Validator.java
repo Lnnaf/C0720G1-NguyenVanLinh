@@ -1,11 +1,38 @@
-package Commons;
+package commons;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Validator {
+    public static boolean regexEmail(String gender) {
+        final String REGEX_EMAIL ="^[A-Za-z0-9]+[A-Za-z0-9]*@[A-Za-z0-9]+(\\\\.[A-Za-z0-9]+)$";
+        Pattern pattern = Pattern.compile(REGEX_EMAIL);
+        Matcher matcher = pattern.matcher(gender);
+        boolean check = matcher.matches();
+        return check;
+    } public static boolean regexIDCard(String gender) {
+        final String REGEX_ID_CARD ="\\d{3}\\s\\d{3}\\s\\d{3}";
+        Pattern pattern = Pattern.compile(REGEX_ID_CARD);
+        Matcher matcher = pattern.matcher(gender);
+        boolean check = matcher.matches();
+        return check;
+    }
+    public static boolean regexGender(String gender) {
+        final String REGEX_GENDER = "(male)|(female)|(unknow)";
+        Pattern pattern = Pattern.compile(REGEX_GENDER);
+        Matcher matcher = pattern.matcher(gender);
+        boolean check = matcher.matches();
+        return check;
+    }
+    public static boolean regexDateOfBirth(String birthDay) {
+        final String REGEX_DATE_OF_BIRTH = "^([0-2][0-9]|(3)[0-1])[/](((0)[1-9])|((1)[0-2]))[/]\\d{4}$";
+        Pattern pattern = Pattern.compile(REGEX_DATE_OF_BIRTH);
+        Matcher matcher = pattern.matcher(birthDay);
+        boolean check = matcher.matches();
+        return check;
+    }
     public static boolean regexNameOfCustomer(String name) {
-        final String REGEX_NAME = "^[A-Z]{1}[a-z](\\s[A-Z]{1}[a-z])*$";
+        final String REGEX_NAME = "^([A-Z]{1}([a-z])*)((\\s[A-Z]{1}[a-z])*$)";
         Pattern pattern = Pattern.compile(REGEX_NAME);
         Matcher matcher = pattern.matcher(name);
         boolean check = matcher.matches();

@@ -1,4 +1,4 @@
-package Models;
+package models;
 
 public class Villa extends Service  {
     private String standard;
