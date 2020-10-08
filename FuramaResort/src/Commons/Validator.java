@@ -19,7 +19,7 @@ public class Validator {
         return check;
     }
     public static boolean regexId(String id) {
-        final String REGEX_ID = "^F(VL|H|R)-\\d{4}";
+        final String REGEX_ID = "^SV(VL|H|R)-\\d{4}";
         Pattern pattern = Pattern.compile(REGEX_ID);
         Matcher matcher = pattern.matcher(id);
         boolean check = matcher.matches();

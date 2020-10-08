@@ -1,4 +1,4 @@
-package _015_debug.exercise;
+    package _015_debug.exercise;
 import java.util.*;
 public class Triangle {
     int side1, side2, side3;
