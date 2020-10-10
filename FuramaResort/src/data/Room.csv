@@ -1,11 +1,6 @@
-FR-0030,Room,100,3,3,Pay,massage
-null,null,null,null,null,null,null
-null,null,null,null,null,null,null
-null,null,null,null,null,null,null
-null,null,null,null,null,null,null
-null,null,null,null,null,null,null
-null,null,null,null,null,null,null
-null,null,null,null,null,null,null
-null,null,null,null,null,null,null
-null,null,null,null,null,null,null
-null,null,null,null,null,null,null
+SVRO-1111,Room4,50,750,2,Pay,massage,2,200
+SVRO-2222,Room3,90,240,1,Atm,karaoke,2,200
+SVRO-3333,Room2,100,123,3,Visa,massage,2,200
+SVRO-4444,Room4,40,908,4,Pay,karaoke,2,200
+SVRO-5555,Room2,100,226,2,Cash,massage,2,200
+SVRO-6666,Room1,80,1230,1,Atm,massage,2,200

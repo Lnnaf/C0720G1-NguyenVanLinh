@@ -1,11 +1,13 @@
 package commons;
 
+import models.Service;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Validator {
     public static boolean regexEmail(String gender) {
-        final String REGEX_EMAIL ="^[A-Za-z0-9]+[A-Za-z0-9]*@[A-Za-z0-9]+(\\\\.[A-Za-z0-9]+)$";
+        final String REGEX_EMAIL ="^[A-Za-z0-9]+[A-Za-z0-9]*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)$";
         Pattern pattern = Pattern.compile(REGEX_EMAIL);
         Matcher matcher = pattern.matcher(gender);
         boolean check = matcher.matches();
@@ -32,7 +34,7 @@ public class Validator {
         return check;
     }
     public static boolean regexNameOfCustomer(String name) {
-        final String REGEX_NAME = "^([A-Z]{1}([a-z])*)((\\s[A-Z]{1}[a-z])*$)";
+        final String REGEX_NAME = "^([A-Z]{1}([a-z])*)(\\s[A-Z]{1}[a-z]*)*$";
         Pattern pattern = Pattern.compile(REGEX_NAME);
         Matcher matcher = pattern.matcher(name);
         boolean check = matcher.matches();
@@ -46,7 +48,7 @@ public class Validator {
         return check;
     }
     public static boolean regexId(String id) {
-        final String REGEX_ID = "^SV(VL|H|R)-\\d{4}";
+        final String REGEX_ID = "^SV(VL|HO|RO)-\\d{4}";
         Pattern pattern = Pattern.compile(REGEX_ID);
         Matcher matcher = pattern.matcher(id);
         boolean check = matcher.matches();
@@ -88,14 +90,7 @@ public class Validator {
         Matcher matcher = pattern.matcher(rentalCost);
         boolean check = matcher.matches();
         return check;
-//        int costRental= Integer.parseInt(rentalCost);
-//        boolean check;
-//        if(costRental>0){
-//            check= true;
-//        }else {
-//            check=false;
-//        }
-//        return check;
+
     }
     public static boolean regexMaxPeople(String maxPeople) {
         final String REGEX_MAXPEOPLE = "[1-9]|1\\d{1}|[20]";
@@ -103,14 +98,7 @@ public class Validator {
         Matcher matcher = pattern.matcher(maxPeople);
         boolean check = matcher.matches();
         return check;
-//        int people= Integer.parseInt(maxPeople);
-//        boolean check;
-//        if(people>0&&people<20){
-//            check=true;
-//        }else {
-//            check=false;
-//        }
-//        return check;
+
     }
     public static boolean
     regexFreeConvenient(String freeConvenient) {

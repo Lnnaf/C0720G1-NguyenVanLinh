@@ -1,6 +1,8 @@
 package models;
 
-public class Customer {
+import java.util.Comparator;
+
+public class Customer  {
     private String nameOfCustomer;
     private String dateOfBirth;
     private String gene;
@@ -12,6 +14,16 @@ public class Customer {
     private Service Service;
 
     public Customer() {
+    }
+    public Customer(String nameOfCustomer, String dateOfBirth, String gene, String idCard, int phoneNumber, String email, String typeOfCustomer, String address) {
+        this.nameOfCustomer = nameOfCustomer;
+        this.dateOfBirth = dateOfBirth;
+        this.gene = gene;
+        this.idCard = idCard;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+        this.typeOfCustomer = typeOfCustomer;
+        this.address = address;
     }
 
     public Customer(String nameOfCustomer, String dateOfBirth, String gene, String idCard, int phoneNumber, String email, String typeOfCustomer, String address, models.Service service) {
@@ -97,7 +109,9 @@ public class Customer {
     public void setService(models.Service service) {
         Service = service;
     }
-
+public void showInFor(){
+    System.out.println(this.toString());
+}
     @Override
     public String toString() {
         return "Customer{" +
@@ -112,4 +126,5 @@ public class Customer {
                 ", Service=" + Service +
                 '}';
     }
+
 }

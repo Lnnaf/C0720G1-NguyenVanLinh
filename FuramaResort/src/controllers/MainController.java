@@ -1,10 +1,7 @@
 package controllers;
 
 import commons.*;
-import models.Customer;
-import models.House;
-import models.Room;
-import models.Villa;
+import models.*;
 
 import java.io.*;
 import java.util.*;
@@ -15,6 +12,8 @@ public class MainController {
     public static final String FILE_PATH_HOUSE = "src/Data/House.csv";
     public static final String FILE_PATH_ROOM = "src/Data/Room.csv";
     public static final String FILE_PATH_CUSTOMER = "src/Data/Customer.csv";
+    public static final String FILE_PATH_BOOKING = "src/Data/Booking.csv";
+    public static final String FILE_PATH_EMPLOYEE = "src/data/Employee.csv";
 
     static Scanner scanner = new Scanner(System.in);
     public static Villa villaModel = new Villa();
@@ -40,13 +39,13 @@ public class MainController {
                     addNewCustomer();
                     break;
                 case 4:
-                    System.out.println("4");
+                    showInForCustomer();
                     break;
                 case 5:
-                    System.out.println("5");
+                    addNewBooking();
                     break;
                 case 6:
-                    System.out.println("6");
+                    showInForEmployee();
                     break;
                 case 7:
                     System.exit(0);
@@ -55,6 +54,134 @@ public class MainController {
         }
 
 
+    }
+
+    private static void showInForEmployee() {
+
+        try {
+            FileReader fileReader = new FileReader(FILE_PATH_EMPLOYEE);
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+            Map<Integer,Employee> mapEmployee = new HashMap<Integer,Employee>();
+            String temp = null;
+            String[] line = null;
+            int key =1;
+            while ((temp = bufferedReader.readLine()) != null) {
+                line = temp.split(",");
+                Employee employee = new Employee(line[0],line[1],line[2]);
+                mapEmployee.put(key++,employee);
+            }
+            for (Map.Entry<Integer,Employee>entry:mapEmployee.entrySet()) {
+                System.out.println(entry.getKey() + ". " + entry.getValue());
+            }
+
+            bufferedReader.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void addNewBooking() {
+        int chooseVilla = 0;
+        showInForCustomer();
+        System.out.println("Choose customer");
+        int chooseCustomer = scanner.nextInt();
+
+        String linesCustomer = readFilesForBooking(chooseCustomer, FILE_PATH_CUSTOMER);
+
+        System.out.println("1. Booking Villa" +
+                "\n2. Booking House" +
+                "\n3. Booking Room");
+        int choose = scanner.nextInt();
+        switch (choose) {
+            case 1:
+                showAllVilla();
+                System.out.println("Enter Which Villa you want");
+                chooseVilla = scanner.nextInt();
+                String linesVilla = readFilesForBooking(chooseVilla, FILE_PATH_VILLA);
+                String linesWriter = linesCustomer + "," + linesVilla;
+                writerToBooking(linesWriter);
+                break;
+            case 2:
+                showAllHouse();
+                System.out.println("Enter Which House you want");
+                chooseVilla = scanner.nextInt();
+                String lineHouse = readFilesForBooking(chooseVilla, FILE_PATH_HOUSE);
+                String linesWriterHouse = linesCustomer + "," + lineHouse;
+                writerToBooking(linesWriterHouse);
+                break;
+            case 3:
+                showAllRoom();
+                System.out.println("Enter Which House you want");
+                chooseVilla = scanner.nextInt();
+                String lineRoom = readFilesForBooking(chooseVilla, FILE_PATH_ROOM);
+                String linesWriterRoom = linesCustomer + "," + lineRoom;
+                writerToBooking(linesWriterRoom);
+                break;
+        }
+
+
+    }
+
+    private static void writerToBooking(String linesWriter) {
+        try {
+            FileWriter fileWriter = new FileWriter(FILE_PATH_BOOKING, true);
+            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+            bufferedWriter.write(linesWriter + "\n");
+            bufferedWriter.close();
+        } catch (IOException e) {
+            e.getMessage();
+        }
+    }
+
+    private static String readFilesForBooking(int chooseVilla, String file) {
+
+        String listGetted = null;
+        BufferedReader reader = null;
+        try {
+            reader = new BufferedReader(new FileReader(file));
+            List<String> lines = new ArrayList<>();
+            String line = null;
+            while (true) {
+                if ((line = reader.readLine()) == null) break;
+                lines.add(line);
+            }
+            listGetted = lines.get(chooseVilla - 1);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return listGetted;
+    }
+
+    private static void showInForCustomer() {
+        try {
+            FileReader fileReader = new FileReader(FILE_PATH_CUSTOMER);
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+            List<Customer> listCustomer = new ArrayList<>();
+            String temp = null;
+            String[] line = null;
+            int index = 1;
+            while ((temp = bufferedReader.readLine()) != null) {
+                line = temp.split(",");
+                Customer customer = new Customer(line[0], line[1], line[2], line[3], Integer.parseInt(line[4]), line[5],
+                        line[6], line[7], new Service() {
+                    @Override
+                    public void showInFor() {
+
+                    }
+                });
+                listCustomer.add(customer);
+                listCustomer.sort(new SortByName());
+            }
+            for (Customer customer1 : listCustomer) {
+                System.out.println(index++ + ". " + customer1);
+            }
+
+            bufferedReader.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private static void addNewCustomer() {
@@ -116,7 +243,7 @@ public class MainController {
                     check = Validator.regexGender(tempInputGender);
                     if (check) {
                         char first = Character.toUpperCase(tempInputGender.charAt(0));
-                        inputGene = first+tempInputGender.substring(1);
+                        inputGene = first + tempInputGender.substring(1);
                         customerModel.setGene(inputGene);
                         break;
                     } else {
@@ -144,20 +271,20 @@ public class MainController {
                 }
             } while (!check);
 // INPUT PHONE NUMBER
-            int inputPhoneNumber=0;
-           do {
+            int inputPhoneNumber = 0;
+            do {
                 System.out.println("5. ENTER PHONE NUMBER.");
                 try {
                     inputPhoneNumber = Integer.parseInt(scanner.nextLine());
-                    check=true;
+                    check = true;
 
                 } catch (NumberFormatException e) {
                     System.out.println("Please enter only number");
-                    check=false;
+                    check = false;
                 }
-            }while (!check);
+            } while (!check);
             customerModel.setPhoneNumber(inputPhoneNumber);
-            check=false;
+            check = false;
             // INPUT EMAIL
             do {
                 try {
@@ -174,33 +301,35 @@ public class MainController {
                     System.out.println(e.getMessage());
                 }
             } while (!check);
-            check=false;
+            check = false;
+            String inputTypeOfCustomer = null;
             do {
                 try {
                     System.out.println("6. ENTER TYPE OF CUSTOMER.");
-                    String inputEmail = scanner.nextLine();
-                    check = Validator.regexEmail(inputEmail);
-                    if (check) {
-                        customerModel.setEmail(inputEmail);
-                        break;
-                    } else {
-                        throw new EmailException("");
-                    }
-                } catch (InputMismatchException | EmailException e) {
+                    inputTypeOfCustomer = scanner.nextLine();
+                    check = true;
+                } catch (InputMismatchException e) {
                     System.out.println(e.getMessage());
                 }
+                customerModel.setTypeOfCustomer(inputTypeOfCustomer);
             } while (!check);
+            check = false;
+            String inputAddress = null;
+            do {
+                try {
+                    System.out.println("7. ENTER ADDRESS.");
+                    inputAddress = scanner.nextLine();
+                    check = true;
+                } catch (InputMismatchException e) {
+                    System.out.println(e.getMessage());
+                }
+                customerModel.setAddress(inputAddress);
+            } while (!check);
+            String line = customerModel.getNameOfCustomer() + "," + customerModel.getDateOfBirth() + "," + customerModel.getGene() + "," + customerModel.getIdCard() +
+                    "," + customerModel.getPhoneNumber() + "," + customerModel.getEmail() + "," + customerModel.getTypeOfCustomer() + "," + customerModel.getAddress() + "\n";
 
 
-            Room room = new Room(roomModel.getId(), roomModel.getNameOfService(), roomModel.getAreaUsed(), roomModel.getPriceRent(),
-                    roomModel.getMaximumPeople(), roomModel.getTypeOfRent(), roomModel.getServiceFreeInSite());
-
-
-            String line = room.getId() + "," + room.getNameOfService() + "," + room.getAreaUsed() + "," + room.getPriceRent() + "," +
-                    room.getMaximumPeople() + "," + room.getTypeOfRent() + "," + room.getServiceFreeInSite() + "\n";
-
-
-            FileWriter fileWriter = new FileWriter(FILE_PATH_ROOM, true);
+            FileWriter fileWriter = new FileWriter(FILE_PATH_CUSTOMER, true);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
             bufferedWriter.write(line);
             bufferedWriter.close();
@@ -221,7 +350,162 @@ public class MainController {
                 showAllVilla();
                 break;
             case 2:
+                showAllHouse();
+                break;
             case 3:
+                showAllRoom();
+                break;
+            case 4:
+                showAllVillaNotDuplicate();
+                break;
+            case 5:
+                showAllHouseNotDuplicate();
+                break;
+            case 6:
+                showAllRoomNotDuplicate();
+                break;
+        }
+    }
+
+    private static void showAllRoomNotDuplicate() {
+        try {
+            FileReader fileReader = new FileReader(FILE_PATH_ROOM);
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+            String temp = null;
+            String[] line = null;
+            Set<Room> listRoom = new TreeSet<>(new Comparator<Room>() {
+                @Override
+                public int compare(Room o1, Room o2) {
+                    return o1.getNameOfService().compareTo(o2.getNameOfService());
+                }
+            });
+            while ((temp = bufferedReader.readLine()) != null) {
+                line = temp.split(",");
+                Room room = new Room(line[0], line[1], line[2], line[3], line[4], line[5],
+                        new ExtraService(line[6], line[7], line[8]));
+                listRoom.add(room);
+            }
+            int index = 1;
+            for (Room room1 : listRoom) {
+                room1.showInFor();
+            }
+
+            bufferedReader.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void showAllHouseNotDuplicate() {
+        try {
+            FileReader fileReader = new FileReader(FILE_PATH_HOUSE);
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+            Set<House> listHouse = new TreeSet<>(new Comparator<House>() {
+                @Override
+                public int compare(House o1, House o2) {
+                    return o1.getNameOfService().compareTo(o2.getNameOfService());
+                }
+            });
+            String temp = null;
+            String[] line = null;
+            int index = 1;
+            while ((temp = bufferedReader.readLine()) != null) {
+                line = temp.split(",");
+                House house = new House(line[0], line[1], line[2], line[3], line[4], line[5], line[6], line[7], line[8]);
+                listHouse.add(house);
+            }
+            for (House house1 : listHouse) {
+                System.out.print(index++ + ". ");
+                house1.showInFor();
+            }
+
+            bufferedReader.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void showAllVillaNotDuplicate() {
+        try {
+            FileReader fileReader = new FileReader(FILE_PATH_VILLA);
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+            String temp = null;
+            String[] line = null;
+            Set<Villa> listVilla = new TreeSet<>(new Comparator<Villa>() {
+                @Override
+                public int compare(Villa o1, Villa o2) {
+                    return o1.getNameOfService().compareTo(o2.getNameOfService());
+                }
+            });
+            while ((temp = bufferedReader.readLine()) != null) {
+                line = temp.split(",");
+                Villa villa = new Villa(line[0], line[1], line[2], line[3], line[4], line[5],
+                        line[6], line[7], line[8], line[9]);
+                listVilla.add(villa);
+            }
+            int index = 1;
+            for (Villa villa1 : listVilla) {
+                villa1.showInFor();
+            }
+
+            bufferedReader.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    private static void showAllHouse() {
+        try {
+
+            FileReader fileReader = new FileReader(FILE_PATH_HOUSE);
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+            List<House> listHouse = new ArrayList<>();
+            String temp = null;
+            String[] line = null;
+            int index = 1;
+            while ((temp = bufferedReader.readLine()) != null) {
+                line = temp.split(",");
+                House house = new House(line[0], line[1], line[2], line[3], line[4], line[5], line[6], line[7], line[8]);
+                listHouse.add(house);
+            }
+            for (House house1 : listHouse) {
+                System.out.print(index++ + ". ");
+                house1.showInFor();
+            }
+
+            bufferedReader.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void showAllRoom() {
+        try {
+
+            FileReader fileReader = new FileReader(FILE_PATH_ROOM);
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+            List<Room> listRoom = new ArrayList<>();
+            String temp = null;
+            String[] line = null;
+            while ((temp = bufferedReader.readLine()) != null) {
+                line = temp.split(",");
+                Room room = new Room(line[0], line[1], line[2], line[3], line[4], line[5],
+                        new ExtraService(line[6], line[7], line[8]));
+                listRoom.add(room);
+            }
+            for (Room room1 : listRoom) {
+                room1.showInFor();
+            }
+
+            bufferedReader.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
@@ -239,8 +523,9 @@ public class MainController {
                         line[6], line[7], line[8], line[9]);
                 listVilla.add(villa);
             }
+            int index = 1;
             for (Villa villa1 : listVilla) {
-                villa1.showInFor();
+                System.out.println(index++ + ". " + villa1);
             }
 
             bufferedReader.close();
@@ -351,26 +636,28 @@ public class MainController {
                     System.out.println("Wrong format warnning, please try again!");
                 }
             } while (!check);
-
             check = false;
+            String nameExtraService;
             do {
-                System.out.println("7. ENTER FREE SERVICE IN SITE . ");
-                String typeOfRent = scanner.nextLine();
-                check = Validator.regexRentalType(typeOfRent);
+                System.out.println("Enter Name Of Extra Service");
+                nameExtraService = scanner.nextLine();
+                check = Validator.regexFreeConvenient(nameExtraService);
                 if (check) {
-                    roomModel.setServiceFreeInSite(typeOfRent);
                     break;
                 } else {
                     System.out.println("Wrong format warnning, please try again!");
                 }
             } while (!check);
+            System.out.println("Enter Unit");
+            String unit = scanner.nextLine();
+            System.out.println("Enter Price");
+            String price = scanner.nextLine();
+            ExtraService extraService = new ExtraService(nameExtraService, unit, price);
+            roomModel.setFreeService(extraService);
 
-            Room room = new Room(roomModel.getId(), roomModel.getNameOfService(), roomModel.getAreaUsed(), roomModel.getPriceRent(),
-                    roomModel.getMaximumPeople(), roomModel.getTypeOfRent(), roomModel.getServiceFreeInSite());
 
-
-            String line = room.getId() + "," + room.getNameOfService() + "," + room.getAreaUsed() + "," + room.getPriceRent() + "," +
-                    room.getMaximumPeople() + "," + room.getTypeOfRent() + "," + room.getServiceFreeInSite() + "\n";
+            String line = roomModel.getId() + "," + roomModel.getNameOfService() + "," + roomModel.getAreaUsed() + "," + roomModel.getPriceRent() + "," +
+                    roomModel.getMaximumPeople() + "," + roomModel.getTypeOfRent() + "," + roomModel.getFreeService().getNameExtraService() + "," + roomModel.getFreeService().getUnit() + "," + roomModel.getFreeService().getPrice() + "\n";
 
 
             FileWriter fileWriter = new FileWriter(FILE_PATH_ROOM, true);

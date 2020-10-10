@@ -1,30 +1,36 @@
 package models;
 
-public class Room extends Service {
+public class Room extends Service  {
 
-    private Service serviceFreeInSite;
+    // properties :
+    private ExtraService FreeService;
+
+    // method constructor of room:
 
     public Room() {
     }
 
-    public Room(String id, String fullName, String areaUser, String priceRent, String maximumPeople, String typeOfRent, Service serviceFreeInSite) {
-        super(id, fullName, areaUser, priceRent, maximumPeople, typeOfRent);
-        this.serviceFreeInSite = serviceFreeInSite;
+    public Room(String id, String nameOfService, String areaUsed, String priceRent, String maximumPeople, String typeOfRent, ExtraService freeService) {
+        super(id, nameOfService, areaUsed, priceRent, maximumPeople, typeOfRent);
+        FreeService = freeService;
     }
 
-    public Service getServiceFreeInSite() {
-        return serviceFreeInSite;
+    // get and set of room:
+
+
+    public ExtraService getFreeService() {
+        return FreeService;
     }
 
-    public void setServiceFreeInSite(Service serviceFreeInSite) {
-        this.serviceFreeInSite = serviceFreeInSite;
+    public void setFreeService(ExtraService freeService) {
+        FreeService = freeService;
     }
 
     @Override
     public String toString() {
         return "Room{" +super.toString()+
-                "serviceFreeGoWith='" + serviceFreeInSite + '\'' +
-                '}';
+                "FreeService=" + FreeService
+                 ;
     }
 
     @Override

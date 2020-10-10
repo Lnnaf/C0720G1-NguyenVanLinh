@@ -5,7 +5,7 @@ public class House extends Service {
 
     private String standardHouse;
     private String otherComfortHouse;
-        private String numOfFloorsHouse;
+    private String numOfFloorsHouse;
 
     public House() {
     }
