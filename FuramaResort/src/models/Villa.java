@@ -1,6 +1,6 @@
 package models;
 
-public class Villa extends Service  {
+public class Villa extends Service {
     private String standard;
     private String otherComfort;
     private String areaPool;
@@ -27,8 +27,7 @@ public class Villa extends Service  {
         this.standard = standard;
     }
 
-    public String getOtherComfort()
-    {
+    public String getOtherComfort() {
         return otherComfort;
     }
 
@@ -63,7 +62,7 @@ public class Villa extends Service  {
                 "standard='" + standard + '\'' +
                 ", otherComfort='" + otherComfort + '\'' +
                 ", areaPool=" + areaPool +
-                ", numOfFloors=" + numOfFloors ;
+                ", numOfFloors=" + numOfFloors;
     }
 
 }

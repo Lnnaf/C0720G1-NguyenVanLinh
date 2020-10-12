@@ -24,9 +24,15 @@ public class MainController {
     public static void displayMainMenu() {
         while (true) {
             System.out.println("*****************************");
-            System.out.println("1. Add New Service. " + "\n2. Show Service." + "\n3. Add New Customer"
-                    + "\n4. Show Information Customer" + "\n5. Add New Booking" + "\n6. Show Information of Employee"
-                    + "\n7. Exit");
+            System.out.println("1. Add New Service. " +
+                    "\n2. Show Service." +
+                    "\n3. Add New Customer" +
+                    "\n4. Show Information Customer" +
+                    "\n5. Add New Booking" +
+                    "\n6. Show Information of Employee" +
+                    "\n7. Show Booked Ticked" +
+                    "\n8. Search Profile Employee by Name" +
+                    "\n9. Exit");
             int inputChooseOfMainMenu = scanner.nextInt();
             switch (inputChooseOfMainMenu) {
                 case 1:
@@ -48,6 +54,12 @@ public class MainController {
                     showInForEmployee();
                     break;
                 case 7:
+                    showBookedTicked();
+                    break;
+                case 8:
+                    ProfileBox.searchProfile();
+                    break;
+                case 9:
                     System.exit(0);
                     break;
             }
@@ -61,16 +73,16 @@ public class MainController {
         try {
             FileReader fileReader = new FileReader(FILE_PATH_EMPLOYEE);
             BufferedReader bufferedReader = new BufferedReader(fileReader);
-            Map<Integer,Employee> mapEmployee = new HashMap<Integer,Employee>();
+            Map<Integer, Employee> mapEmployee = new HashMap<Integer, Employee>();
             String temp = null;
             String[] line = null;
-            int key =1;
+            int key = 1;
             while ((temp = bufferedReader.readLine()) != null) {
                 line = temp.split(",");
-                Employee employee = new Employee(line[0],line[1],line[2]);
-                mapEmployee.put(key++,employee);
+                Employee employee = new Employee(line[0], line[1], line[2]);
+                mapEmployee.put(key++, employee);
             }
-            for (Map.Entry<Integer,Employee>entry:mapEmployee.entrySet()) {
+            for (Map.Entry<Integer, Employee> entry : mapEmployee.entrySet()) {
                 System.out.println(entry.getKey() + ". " + entry.getValue());
             }
 
@@ -942,6 +954,36 @@ public class MainController {
         }
 
 
+    }
+
+    private static void showBookedTicked() {
+        try {
+            FileReader fileReader = new FileReader(FILE_PATH_CUSTOMER);
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+            Queue<Customer> listCustomer = new LinkedList<Customer>();
+            String temp = null;
+            String[] line = null;
+            int index = 1;
+            while ((temp = bufferedReader.readLine()) != null) {
+                line = temp.split(",");
+                Customer customer = new Customer(line[0], line[1], line[2], line[3], Integer.parseInt(line[4]), line[5],
+                        line[6], line[7], new Service() {
+                    @Override
+                    public void showInFor() {
+
+                    }
+                });
+                listCustomer.add(customer);
+            }
+            while (!listCustomer.isEmpty()) {
+                System.out.println(index++ + ". " + listCustomer.poll());
+            }
+
+            bufferedReader.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public static void main(String[] args) {

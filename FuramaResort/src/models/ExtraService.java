@@ -1,7 +1,7 @@
 package models;
 
 public class ExtraService {
-   // properties:
+    // properties:
 
     private String nameExtraService;
     private String unit;
@@ -48,8 +48,8 @@ public class ExtraService {
 
     @Override
     public String toString() {
-        return   nameExtraService + ',' +
-                 "unit = "+ unit + ',' +
-                 "price = "+price ;
+        return nameExtraService + ',' +
+                "unit = " + unit + ',' +
+                "price = " + price;
     }
 }
